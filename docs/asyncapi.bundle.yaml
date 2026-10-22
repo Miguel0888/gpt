@@ -272,7 +272,7 @@ components:
     ConversationDoneMarker:
       name: "[DONE]"
       title: Stream completion sentinel
-      description: Terminal marker: [DONE].
+      description: "Terminal marker: [DONE]."
       contentType: text/plain
       x-stream-terminator: true
       payload:
