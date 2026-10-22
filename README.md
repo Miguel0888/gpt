@@ -1,40 +1,45 @@
 # GPT
 
-This repository stores ChatGPT personalization notes and reverse-engineered API documentation.
+This repository contains ChatGPT personalization notes and evidence-based documentation of observed ChatGPT web interfaces.
 
-## API documentation
+## Published API documentation
 
-The documentation is intentionally split by interface type:
+GitHub Pages is enabled and publishes the `main` branch from `/docs`.
 
-- **[OpenAPI / Swagger UI](docs/index.html)** — HTTP methods, paths, parameters, observed request fields and HTTP responses.
-- **[OpenAPI YAML](docs/openapi.yaml)** — canonical OpenAPI 3.1 document used by Swagger UI.
-- **[AsyncAPI viewer](docs/asyncapi.html)** — observed message events from the conversation and file-processing streams.
-- **[AsyncAPI YAML](docs/asyncapi.yaml)** — message channels and payload schemas supported by the available captures.
-- **[Browser hooks](docs/hooks.md)** — JavaScript instrumentation points, normalized events, lifecycle, ordering and privacy requirements.
-- **[HAR observations](docs/observations.md)** — evidence, counts, confidence and unresolved protocol details.
-- **[Specification notes](docs/chatgpt-api-specification.md)** — scope and limitations.
-- **[Shared JSON Schemas](docs/schemas/)** — reusable wire-message and normalized-event contracts.
+- **[OpenAPI / Swagger UI](https://miguel0888.github.io/gpt/)** — HTTP endpoints, methods, parameters, request bodies and responses.
+- **[AsyncAPI / message streams](https://miguel0888.github.io/gpt/asyncapi.html)** — observed conversation and file-processing stream messages.
+- **[Browser hooks](https://miguel0888.github.io/gpt/hooks.html)** — browser instrumentation, normalized events, lifecycle, ordering and privacy requirements.
+- **[HAR observations](https://miguel0888.github.io/gpt/observations.html)** — evidence, counts, confidence and unresolved protocol details.
+- **[Specification notes](https://miguel0888.github.io/gpt/specification.html)** — scope, assumptions and limitations.
 
-Swagger UI loads `./openapi.yaml` relative to `docs/index.html`. The AsyncAPI viewer loads `./asyncapi.yaml` relative to `docs/asyncapi.html`; keep these files together under `docs/` so the links work when published at a GitHub Pages project path such as `/gpt/`.
+## Specification sources
 
-## Publish with GitHub Pages
+The source files live under `docs/`:
 
-GitHub Pages is not enabled for this repository yet. To publish the site:
+- [OpenAPI source](docs/openapi.yaml) — the canonical OpenAPI 3.1 document loaded by Swagger UI.
+- [AsyncAPI source](docs/asyncapi.yaml) — the canonical AsyncAPI 3.1 document. It references reusable JSON Schemas.
+- [AsyncAPI viewer bundle](docs/asyncapi.bundle.yaml) — a self-contained copy for browser rendering. External JSON Schema references are resolved so the browser component does not need a filesystem resolver.
+- [Browser hook specification](docs/hooks.md)
+- [HAR observations](docs/observations.md)
+- [Specification notes](docs/chatgpt-api-specification.md)
+- [Shared stream JSON Schemas](docs/schemas/chat-stream-events.schema.json)
+- [Normalized Event Hub JSON Schema](docs/schemas/normalized-event.schema.json)
 
-1. Open **Settings → Pages**.
-2. Under **Build and deployment**, select **Deploy from a branch**.
-3. Select branch `main` and folder `/docs`, then save.
-4. Wait for the Pages deployment to complete.
-
-After Pages is enabled, the entry page should be available at:
-
-https://miguel0888.github.io/gpt/
-
-The documentation source can also be reviewed directly in the repository before publishing.
+The Swagger UI loads `docs/openapi.yaml`. The AsyncAPI page loads the self-contained `docs/asyncapi.bundle.yaml`; the canonical `docs/asyncapi.yaml` remains the maintainable source and references the shared schemas.
 
 ## Validation
 
-The GitHub Actions workflow validates the AsyncAPI and OpenAPI documents and checks local documentation links and JSON Schema syntax on pull requests and pushes.
+GitHub Actions validates the OpenAPI and AsyncAPI source documents, checks local documentation links and JSON Schema files, and verifies that the checked-in AsyncAPI viewer bundle matches the source specification after resolving local schema references.
+
+To regenerate the viewer bundle after changing the AsyncAPI source or shared stream schemas, run:
+
+```bash
+python -m pip install PyYAML==6.0.3
+python scripts/build_asyncapi_bundle.py
+python scripts/validate_docs.py
+```
+
+Use `python scripts/build_asyncapi_bundle.py --check` to check whether the committed bundle is up to date without changing files.
 
 ## Scope and security
 
