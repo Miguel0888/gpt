@@ -2,17 +2,17 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://miguel0888.github.io/gpt/schemas/chat-stream-events.schema.json",
   "title": "ChatGPT web stream event payloads",
-  "description": "Reusable JSON Schema definitions for observed wire payloads. Unknown fields and unknown payload shapes remain permissive by design.",
+  "description": "JSON Schema definitions for observed stream event payloads.",
   "definitions": {
     "ConversationDeltaPayload": {
-      "description": "Payload of the explicitly named SSE delta event. The available HAR summary does not establish a stable field-level shape."
+      "description": "Field-level payload schema unavailable in current observations."
     },
     "ConversationDeltaEncodingPayload": {
-      "description": "Payload of the explicitly named SSE delta_encoding event. The capture summary reports the value v1 but does not establish the complete wire shape."
+      "description": "The value v1 was observed; the complete payload structure was not captured."
     },
     "ConversationResumeToken": {
       "type": "object",
-      "description": "Observed JSON data event. Do not persist or log token values.",
+      "description": "JSON data event with type resume_conversation_token.",
       "properties": {
         "type": {
           "type": "string",
@@ -58,7 +58,7 @@
     },
     "ConversationMessageMarker": {
       "type": "object",
-      "description": "Observed marker values include cot_token, user_visible_token, final_channel_token and last_token. The field carrying the marker value is not inferred here.",
+      "description": "Observed marker values include cot_token, user_visible_token, final_channel_token and last_token. The marker field name is unknown.",
       "properties": {
         "type": {
           "type": "string",
@@ -128,8 +128,7 @@
       "description": "Observed line-delimited JSON event from POST /backend-api/files/process_upload_stream.",
       "properties": {
         "file_id": {
-          "type": "string",
-          "description": "File identifier; treat as sensitive metadata."
+          "type": "string"
         },
         "event": {
           "type": "string",
