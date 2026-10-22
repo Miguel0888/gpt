@@ -5,7 +5,7 @@
 - [OpenAPI / Swagger UI](https://miguel0888.github.io/gpt/)
 - [AsyncAPI / Streams](https://miguel0888.github.io/gpt/asyncapi.html)
 - [Browser-Hooks](https://miguel0888.github.io/gpt/hooks.html)
-- [HAR-Beobachtungen](https://miguel0888.github.io/gpt/observations.html)
+- [Technische Ergebnisse](https://miguel0888.github.io/gpt/results.html)
 - [Schnittstellenübersicht](https://miguel0888.github.io/gpt/specification.html)
 
 ## Quelldateien
@@ -14,7 +14,7 @@
 - [AsyncAPI](docs/asyncapi.yaml)
 - [AsyncAPI-Bundle für die Browserdarstellung](docs/asyncapi.bundle.yaml)
 - [Hook-Spezifikation](docs/hooks.md)
-- [HAR-Beobachtungen](docs/observations.md)
+- [Technische Ergebnisse](docs/results.md)
 - [Schnittstellenübersicht](docs/chatgpt-api-specification.md)
 - [Stream-JSON-Schema](docs/schemas/chat-stream-events.schema.json)
 - [Normalisiertes Event-Schema](docs/schemas/normalized-event.schema.json)
