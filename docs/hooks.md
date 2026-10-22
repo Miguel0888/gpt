@@ -8,7 +8,7 @@ permalink: hooks.html
 
 ## Zweck und Abgrenzung
 
-Diese Spezifikation beschreibt, wie ein Browser Event Hub Aktivitäten der ChatGPT-Weboberfläche erkennt und in einen stabilen, eigenen Event-Vertrag überführt. Sie beschreibt **keine** offiziellen OpenAI-APIs.
+Diese Spezifikation beschreibt, wie ein Browser Event Hub Aktivitäten der ChatGPT-Weboberfläche erkennt und in einen stabilen, eigenen Event-Vertrag überführt.
 
 - **OpenAPI** beschreibt HTTP-Aufrufe, Methoden, Parameter und HTTP-Responses.
 - **AsyncAPI** beschreibt die belegten Nachrichtenvarianten innerhalb der Chat- und Datei-Streams.
@@ -115,11 +115,8 @@ Payload-Felder bleiben ereignisspezifisch. Benenne nur Felder um, deren Bedeutun
 - Entferne sensible Query-Parameter und IDs aus Logs, sofern sie nicht zwingend für die lokale Korrelation benötigt werden.
 - Erfasse Nachrichtentext nur, wenn die Integration ihn ausdrücklich benötigt, und behandle ihn als vertraulichen Inhalt.
 - Sende keine aufgezeichneten Nutzdaten an externe Validatoren oder Telemetriedienste.
-- Veröffentliche nur bereinigte Spezifikationen, keine originalen HAR-Dateien.
 
-## Noch offene Punkte
+## Nicht erfasste Details
 
 - Die genauen WebSocket-Nachrichtenframes sind nicht vorhanden.
 - Die Datei-Verarbeitung verwendet im Mitschnitt ein ungewöhnliches Verhältnis zwischen Content-Type und Body-Framing; zukünftige Mitschnitte müssen dies bestätigen.
-- Selektoren und DOM-Semantik können sich mit Änderungen der Weboberfläche ändern.
-- Interne Endpunkte sind nicht stabil und können sich ohne Vorankündigung ändern.

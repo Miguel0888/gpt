@@ -1,30 +1,20 @@
 asyncapi: 3.1.0
 info:
-  title: ChatGPT Web Streams — HAR Observations
+  title: ChatGPT Web Streams
   version: "0.1.0"
-  description: >
-    Reverse-engineered message inventory based on user-provided HAR captures from
-    2026-10-16 and 2026-10-22. This is not an official or stable OpenAI API contract.
-    The HTTP request and response surface remains documented in openapi.yaml.
-    This document models only observed stream message categories. Payloads are
-    deliberately permissive where the captures did not establish a stable schema.
-    WebSocket handshakes are documented in OpenAPI, but no WebSocket message frames
-    were present in the captures, so no WebSocket payload channels are invented.
+  description: Observed messages from the conversation and file-processing streams.
 defaultContentType: application/json
 servers:
   chatgptWeb:
     host: chatgpt.com
     protocol: https
-    description: Observed origin for the HTTP requests that initiate the streams.
 channels:
   conversationStream:
     address: /backend-api/f/conversation
     description: >
-      POST response stream advertised as text/event-stream. The request body,
-      authentication context and HTTP status are documented in openapi.yaml.
-      Explicit SSE event names are delta and delta_encoding. Other observed
-      events are JSON data objects identified by their type property. The message
-      contentType describes the event data payload, not the HTTP response header.
+      POST response stream with Content-Type text/event-stream.
+      Explicit SSE event names are delta and delta_encoding.
+      Other observed events are JSON data objects identified by their type property.
     messages:
       delta:
         $ref: "#/components/messages/ConversationDelta"
@@ -60,11 +50,7 @@ channels:
       doneMarkers: 4
   fileProcessingStream:
     address: /backend-api/files/process_upload_stream
-    description: >
-      POST response whose HTTP Content-Type is text/event-stream, while the
-      captured body is newline-delimited JSON objects rather than conventional
-      SSE event/data frames. Treat this framing as a capture-specific observation,
-      not a guarantee for future versions.
+    description: Captured newline-delimited JSON body with Content-Type text/event-stream.
     messages:
       fileProcessing:
         $ref: "#/components/messages/FileProcessingEvent"
@@ -76,11 +62,6 @@ operations:
   receiveConversationStream:
     action: receive
     summary: Receive events from a conversation response stream
-    description: >
-      The client initiates this stream with POST /backend-api/f/conversation.
-      Use OpenAPI for the HTTP request body and response contract. Event payload
-      shapes are incomplete; preserve unknown fields and avoid assuming that the
-      listed variants are exhaustive.
     channel:
       $ref: "#/channels/conversationStream"
     messages:
@@ -100,11 +81,6 @@ operations:
   receiveFileProcessingStream:
     action: receive
     summary: Receive file-processing progress events
-    description: >
-      The captured body contains newline-delimited JSON objects despite the
-      text/event-stream response Content-Type. The client should use a dedicated
-      line-delimited JSON adapter for the observed capture and re-check framing
-      against future HARs.
     channel:
       $ref: "#/channels/fileProcessingStream"
     messages:
@@ -118,9 +94,7 @@ components:
       name: delta
       title: Conversation delta
       summary: Incremental conversation output
-      description: >
-        Explicit SSE event name observed in four complete streams. The exact
-        payload structure is not established by the sanitized observation summary.
+      description: "Observed in four complete streams; field-level payload schema unavailable."
       contentType: application/json
       x-sse-event-name: delta
       payload:
@@ -130,7 +104,7 @@ components:
     ConversationDeltaEncoding:
       name: delta_encoding
       title: Delta encoding
-      description: Explicit SSE event name observed; the value v1 was reported in the capture summary.
+      description: "Observed in four complete streams; value v1 reported."
       contentType: application/json
       x-sse-event-name: delta_encoding
       payload:
@@ -140,7 +114,7 @@ components:
     ResumeConversationToken:
       name: resume_conversation_token
       title: Conversation resume token
-      description: JSON data event identified by its type field. Do not persist token values.
+      description: "JSON data event with type resume_conversation_token."
       contentType: application/json
       x-payload-type-field: type
       payload:

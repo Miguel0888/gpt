@@ -78,6 +78,17 @@ def main():
     require('url: "./openapi.yaml"' in index_html, "Swagger UI must load ./openapi.yaml.")
     require('url: "./asyncapi.bundle.yaml"' in asyncapi_html, "AsyncAPI viewer must load the self-contained ./asyncapi.bundle.yaml.")
     require("supportedSubmitMethods: []" in index_html, "Swagger UI interactive submission must remain disabled.")
+    require('<aside class="notice">' not in index_html, "Swagger UI page must not contain an editorial notice banner.")
+    require('<aside class="notice">' not in asyncapi_html, "AsyncAPI page must not contain an editorial notice banner.")
+
+    layout_html = (DOCS / "_layouts/default.html").read_text(encoding="utf-8")
+    require("Not an official or stable OpenAI API contract" not in layout_html, "Remove the editorial API disclaimer from the shared layout.")
+
+    openapi_text = (DOCS / "openapi.yaml").read_text(encoding="utf-8").lower()
+    asyncapi_text = (DOCS / "asyncapi.yaml").read_text(encoding="utf-8").lower()
+    require("not an official or stable openai api" not in openapi_text, "Remove editorial API disclaimers from OpenAPI.")
+    require("not an official or stable openai api" not in asyncapi_text, "Remove editorial API disclaimers from AsyncAPI.")
+    require("this is an internal, reverse-engineered web interface" not in openapi_text, "Remove repeated editorial text from OpenAPI.")
 
     asyncapi_bundle = (DOCS / "asyncapi.bundle.yaml").read_text(encoding="utf-8")
     require("./schemas/chat-stream-events.schema.json#/" not in asyncapi_bundle, "AsyncAPI viewer bundle must not contain external JSON Schema references.")

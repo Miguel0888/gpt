@@ -1,44 +1,58 @@
 ---
 layout: default
-title: Hinweise zur ChatGPT-Webschnittstelle
+title: Schnittstellenübersicht
 permalink: specification.html
 ---
 
-# ChatGPT internal web API: specification notes
+# Schnittstellenübersicht
 
-## Purpose
+## HTTP
 
-The file [`openapi.yaml`](./openapi.yaml) records HTTP operations observed in user-provided HAR captures. It is a reverse-engineered inventory for research and browser integration, **not an official OpenAI API contract**.
+- HAR-Aufzeichnungen: 16. und 22. Oktober 2026
+- Normalisierte HTTP-Operationsmuster: 69
+- Zugehörige Request-Einträge: 245
+- Die Requests stammen aus einer bereits authentifizierten Browsersitzung.
 
-The [`asyncapi.yaml`](./asyncapi.yaml) describes the message variants observed in the conversation and file-processing streams. [`hooks.md`](./hooks.html) defines browser instrumentation and normalized events. [`observations.md`](./observations.html) records the evidence and the limits of each observation.
+Die Endpunkte, Parameter, beobachteten Statuscodes und verfügbaren Request-/Response-Felder stehen in [OpenAPI](./openapi.yaml).
 
-## Evidence scope
+## Chat-Antwortstream
 
-- Captures: 16 October 2026 and 22 October 2026.
-- Normalized HTTP operation patterns in the OpenAPI inventory: 69.
-- Relevant request entries represented in the inventory: 245.
-- Four complete conversation response streams were summarized, with 53 `delta` events.
+- Endpunkt: `POST /backend-api/f/conversation`
+- Response Content-Type: `text/event-stream`
+- Vollständige Streams: 4
+- `delta`: 53 Ereignisse
+- `delta_encoding`: 4 Ereignisse; Wert `v1`
+- Weitere JSON-`type`-Werte: `resume_conversation_token`, `input_message`, `title_generation`, `message_marker`, `server_ste_metadata`, `message_stream_complete`, `conversation_detail_metadata`
+- Abschlussmarkierung: `[DONE]` in allen vier vollständigen Streams
 
-The operation-level `x-har-observations` extension records request counts, source captures, observed HTTP statuses and limits of schema evidence.
+Details: [AsyncAPI](./asyncapi.html).
 
-## What “complete” means here
+## Datei-Verarbeitungsstream
 
-The OpenAPI specification covers the endpoint patterns represented by the available HAR inventories. It does not claim that every endpoint used by ChatGPT has been discovered. The HAR captures do not provide complete request and response schemas for every operation. Where only field names were visible, property types and required fields are deliberately left unspecified.
+- Endpunkt: `POST /backend-api/files/process_upload_stream`
+- Response Content-Type: `text/event-stream`
+- Beobachtetes Body-Framing: zeilenweise getrennte JSON-Objekte
+- Ereignisse: `file.processing.started`, `file.processing.file_ready`, `file.indexing.completed`, `file.processing.completed`
 
-Dynamic identifiers are normalized to placeholders. Signed upload URLs, session credentials, user content, transcripts and audio asset pointers are not embedded in the specification.
+Details: [AsyncAPI](./asyncapi.html).
 
-## Authentication
+## WebSockets
 
-The captures originate from an already authenticated browser session. The specification therefore does not claim a reusable authentication scheme. Do not copy cookies, bearer values, WebSocket subprotocol values or signed URL parameters into this repository.
+| Host / Pfad | Beobachtete Verbindungen |
+|---|---|
+| `codex-cloud-backend.chatgpt.com/` | 1 Handshake, Status `101` |
+| `chatgpt.com/backend-api/dictation/stream` | WebSocket-Handshake; `dictation_surface`-Query-Parameter |
+| `ws.chatgpt.com/p33/ws/user/{userId}` | 3 Handshakes, Status `101` |
 
-## Streams and browser hooks
+In den HAR-Aufzeichnungen sind keine WebSocket-Nachrichtenframes enthalten.
 
-The conversation stream uses `text/event-stream` and includes observed SSE event names and JSON `type` variants. The file-processing endpoint advertises the same Content-Type, but its captured body consists of newline-delimited JSON objects rather than conventional SSE frames. The framing and payload limitations are documented in [AsyncAPI](./asyncapi.yaml) and [HAR observations](./observations.html).
+## Realtime / SDP
 
-For WebSocket endpoints, the captures contain only handshakes; message frames are absent. The AsyncAPI document therefore does not invent WebSocket payload schemas.
+- Endpunkt: `POST /realtime/wm`
+- Aufrufe: 8
+- HTTP-Status: `201`
+- Request- und Response-Format: `application/sdp`
 
-Browser instrumentation points such as `fetch`, XHR, navigation and DOM events are described separately in [the hook specification](./hooks.html). The normalized Event Hub contract is defined in [`schemas/normalized-event.schema.json`](./schemas/normalized-event.schema.json) and is explicitly a proposed application contract, not a copy of ChatGPT's internal wire schema.
+## Browser-Hooks
 
-## Stability warning
-
-These are private, implementation-specific web endpoints. Paths, parameters, schemas and behavior can change without notice. Keep client implementations behind replaceable adapters and validate them against fresh captures before relying on them.
+Die Instrumentierungspunkte, normalisierten Events und deren Reihenfolge stehen in der [Hook-Spezifikation](./hooks.html). Das Schema des Event-Hub-Vertrags liegt unter [normalized-event.schema.json](./schemas/normalized-event.schema.json).
