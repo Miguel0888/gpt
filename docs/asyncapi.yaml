@@ -1,4 +1,4 @@
-asyncapi: 3.0.0
+asyncapi: 3.1.0
 info:
   title: ChatGPT Web Streams — HAR Observations
   version: "0.1.0"
@@ -83,8 +83,6 @@ operations:
       listed variants are exhaustive.
     channel:
       $ref: "#/channels/conversationStream"
-    servers:
-      - $ref: "#/servers/chatgptWeb"
     messages:
       - $ref: "#/channels/conversationStream/messages/delta"
       - $ref: "#/channels/conversationStream/messages/deltaEncoding"
@@ -109,8 +107,6 @@ operations:
       against future HARs.
     channel:
       $ref: "#/channels/fileProcessingStream"
-    servers:
-      - $ref: "#/servers/chatgptWeb"
     messages:
       - $ref: "#/channels/fileProcessingStream/messages/fileProcessing"
     bindings:
@@ -126,7 +122,6 @@ components:
         Explicit SSE event name observed in four complete streams. The exact
         payload structure is not established by the sanitized observation summary.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       x-sse-event-name: delta
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDeltaPayload"
@@ -135,7 +130,6 @@ components:
       title: Delta encoding
       description: Explicit SSE event name observed; the value v1 was reported in the capture summary.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       x-sse-event-name: delta_encoding
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDeltaEncodingPayload"
@@ -144,7 +138,6 @@ components:
       title: Conversation resume token
       description: JSON data event identified by its type field. Do not persist token values.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       x-payload-type-field: type
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationResumeToken"
@@ -153,7 +146,6 @@ components:
       title: Input message
       description: JSON data event identified by its type field.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       x-payload-type-field: type
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationInputMessage"
@@ -162,7 +154,6 @@ components:
       title: Title generation
       description: JSON data event identified by its type field.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       x-payload-type-field: type
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationTitleGeneration"
@@ -174,7 +165,6 @@ components:
         marker values cot_token, user_visible_token, final_channel_token and
         last_token; the exact property name carrying those values is not asserted.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       x-payload-type-field: type
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationMessageMarker"
@@ -183,7 +173,6 @@ components:
       title: Server STE metadata
       description: JSON data event identified by its type field; field-level schema is incomplete.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       x-payload-type-field: type
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationServerSteMetadata"
@@ -192,7 +181,6 @@ components:
       title: Message stream complete
       description: JSON data event identified by its type field.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       x-payload-type-field: type
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationMessageStreamComplete"
@@ -201,7 +189,6 @@ components:
       title: Conversation detail metadata
       description: JSON data event identified by its type field; field-level schema is incomplete.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       x-payload-type-field: type
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDetailMetadata"
@@ -210,7 +197,6 @@ components:
       title: Stream completion sentinel
       description: Literal terminal marker observed after the stream events.
       contentType: text/plain
-      schemaFormat: "application/schema+json;version=draft-07"
       x-stream-terminator: true
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDoneMarker"
@@ -221,6 +207,5 @@ components:
         Newline-delimited JSON event from the captured file processing stream.
         Progress is absent from the observed file.indexing.completed event.
       contentType: application/json
-      schemaFormat: "application/schema+json;version=draft-07"
       payload:
         $ref: "./schemas/chat-stream-events.schema.json#/definitions/FileProcessingEvent"
