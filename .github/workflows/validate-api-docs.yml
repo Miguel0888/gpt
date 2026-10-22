@@ -32,9 +32,15 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install Python YAML support
+        run: python -m pip install PyYAML==6.0.3
+      - name: Verify the AsyncAPI viewer bundle
+        run: python scripts/build_asyncapi_bundle.py --check
       - name: Check documentation paths and JSON Schemas
         run: python scripts/validate_docs.py
-      - name: Validate AsyncAPI
+      - name: Validate AsyncAPI source
         run: npx --yes @asyncapi/cli@5.0.7 validate docs/asyncapi.yaml --fail-severity error
+      - name: Validate self-contained AsyncAPI viewer bundle
+        run: npx --yes @asyncapi/cli@5.0.7 validate docs/asyncapi.bundle.yaml --fail-severity error
       - name: Lint OpenAPI
         run: npx --yes @redocly/cli lint --extends=minimal docs/openapi.yaml

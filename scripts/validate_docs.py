@@ -60,6 +60,7 @@ def main():
         "openapi.yaml",
         "asyncapi.html",
         "asyncapi.yaml",
+        "asyncapi.bundle.yaml",
         "hooks.md",
         "observations.md",
         "chatgpt-api-specification.md",
@@ -75,8 +76,11 @@ def main():
     index_html = (DOCS / "index.html").read_text(encoding="utf-8")
     asyncapi_html = (DOCS / "asyncapi.html").read_text(encoding="utf-8")
     require('url: "./openapi.yaml"' in index_html, "Swagger UI must load ./openapi.yaml.")
-    require('url: "./asyncapi.yaml"' in asyncapi_html, "AsyncAPI viewer must load ./asyncapi.yaml.")
+    require('url: "./asyncapi.bundle.yaml"' in asyncapi_html, "AsyncAPI viewer must load the self-contained ./asyncapi.bundle.yaml.")
     require("supportedSubmitMethods: []" in index_html, "Swagger UI interactive submission must remain disabled.")
+
+    asyncapi_bundle = (DOCS / "asyncapi.bundle.yaml").read_text(encoding="utf-8")
+    require("./schemas/chat-stream-events.schema.json#/" not in asyncapi_bundle, "AsyncAPI viewer bundle must not contain external JSON Schema references.")
 
     for relative_path in ("index.html", "asyncapi.html", "_layouts/default.html"):
         validate_html_links(relative_path)
