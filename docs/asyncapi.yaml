@@ -1,0 +1,226 @@
+asyncapi: 3.0.0
+info:
+  title: ChatGPT Web Streams — HAR Observations
+  version: "0.1.0"
+  description: >
+    Reverse-engineered message inventory based on user-provided HAR captures from
+    2026-10-16 and 2026-10-22. This is not an official or stable OpenAI API contract.
+    The HTTP request and response surface remains documented in openapi.yaml.
+    This document models only observed stream message categories. Payloads are
+    deliberately permissive where the captures did not establish a stable schema.
+    WebSocket handshakes are documented in OpenAPI, but no WebSocket message frames
+    were present in the captures, so no WebSocket payload channels are invented.
+defaultContentType: application/json
+servers:
+  chatgptWeb:
+    host: chatgpt.com
+    protocol: https
+    description: Observed origin for the HTTP requests that initiate the streams.
+channels:
+  conversationStream:
+    address: /backend-api/f/conversation
+    description: >
+      POST response stream advertised as text/event-stream. The request body,
+      authentication context and HTTP status are documented in openapi.yaml.
+      Explicit SSE event names are delta and delta_encoding. Other observed
+      events are JSON data objects identified by their type property. The message
+      contentType describes the event data payload, not the HTTP response header.
+    messages:
+      delta:
+        $ref: "#/components/messages/ConversationDelta"
+      deltaEncoding:
+        $ref: "#/components/messages/ConversationDeltaEncoding"
+      resumeConversationToken:
+        $ref: "#/components/messages/ResumeConversationToken"
+      inputMessage:
+        $ref: "#/components/messages/InputMessage"
+      titleGeneration:
+        $ref: "#/components/messages/TitleGeneration"
+      messageMarker:
+        $ref: "#/components/messages/MessageMarker"
+      serverSteMetadata:
+        $ref: "#/components/messages/ServerSteMetadata"
+      messageStreamComplete:
+        $ref: "#/components/messages/MessageStreamComplete"
+      conversationDetailMetadata:
+        $ref: "#/components/messages/ConversationDetailMetadata"
+      done:
+        $ref: "#/components/messages/ConversationDoneMarker"
+    x-har-observations:
+      completeStreams: 4
+      deltaEvents: 53
+      deltaEncodingEvents: 4
+      resumeConversationTokenEvents: 4
+      inputMessageEvents: 4
+      titleGenerationEvents: 4
+      messageMarkerEvents: 16
+      serverSteMetadataEvents: 4
+      messageStreamCompleteEvents: 4
+      conversationDetailMetadataEvents: 4
+      doneMarkers: 4
+  fileProcessingStream:
+    address: /backend-api/files/process_upload_stream
+    description: >
+      POST response whose HTTP Content-Type is text/event-stream, while the
+      captured body is newline-delimited JSON objects rather than conventional
+      SSE event/data frames. Treat this framing as a capture-specific observation,
+      not a guarantee for future versions.
+    messages:
+      fileProcessing:
+        $ref: "#/components/messages/FileProcessingEvent"
+    x-har-observations:
+      requestCount: 1
+      observedContentType: text/event-stream
+      observedBodyFraming: newline-delimited JSON
+operations:
+  receiveConversationStream:
+    action: receive
+    summary: Receive events from a conversation response stream
+    description: >
+      The client initiates this stream with POST /backend-api/f/conversation.
+      Use OpenAPI for the HTTP request body and response contract. Event payload
+      shapes are incomplete; preserve unknown fields and avoid assuming that the
+      listed variants are exhaustive.
+    channel:
+      $ref: "#/channels/conversationStream"
+    servers:
+      - $ref: "#/servers/chatgptWeb"
+    messages:
+      - $ref: "#/channels/conversationStream/messages/delta"
+      - $ref: "#/channels/conversationStream/messages/deltaEncoding"
+      - $ref: "#/channels/conversationStream/messages/resumeConversationToken"
+      - $ref: "#/channels/conversationStream/messages/inputMessage"
+      - $ref: "#/channels/conversationStream/messages/titleGeneration"
+      - $ref: "#/channels/conversationStream/messages/messageMarker"
+      - $ref: "#/channels/conversationStream/messages/serverSteMetadata"
+      - $ref: "#/channels/conversationStream/messages/messageStreamComplete"
+      - $ref: "#/channels/conversationStream/messages/conversationDetailMetadata"
+      - $ref: "#/channels/conversationStream/messages/done"
+    bindings:
+      http:
+        method: POST
+  receiveFileProcessingStream:
+    action: receive
+    summary: Receive file-processing progress events
+    description: >
+      The captured body contains newline-delimited JSON objects despite the
+      text/event-stream response Content-Type. The client should use a dedicated
+      line-delimited JSON adapter for the observed capture and re-check framing
+      against future HARs.
+    channel:
+      $ref: "#/channels/fileProcessingStream"
+    servers:
+      - $ref: "#/servers/chatgptWeb"
+    messages:
+      - $ref: "#/channels/fileProcessingStream/messages/fileProcessing"
+    bindings:
+      http:
+        method: POST
+components:
+  messages:
+    ConversationDelta:
+      name: delta
+      title: Conversation delta
+      summary: Incremental conversation output
+      description: >
+        Explicit SSE event name observed in four complete streams. The exact
+        payload structure is not established by the sanitized observation summary.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-sse-event-name: delta
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDeltaPayload"
+    ConversationDeltaEncoding:
+      name: delta_encoding
+      title: Delta encoding
+      description: Explicit SSE event name observed; the value v1 was reported in the capture summary.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-sse-event-name: delta_encoding
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDeltaEncodingPayload"
+    ResumeConversationToken:
+      name: resume_conversation_token
+      title: Conversation resume token
+      description: JSON data event identified by its type field. Do not persist token values.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-payload-type-field: type
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationResumeToken"
+    InputMessage:
+      name: input_message
+      title: Input message
+      description: JSON data event identified by its type field.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-payload-type-field: type
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationInputMessage"
+    TitleGeneration:
+      name: title_generation
+      title: Title generation
+      description: JSON data event identified by its type field.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-payload-type-field: type
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationTitleGeneration"
+    MessageMarker:
+      name: message_marker
+      title: Message marker
+      description: >
+        JSON data event identified by its type field. The capture summary reports
+        marker values cot_token, user_visible_token, final_channel_token and
+        last_token; the exact property name carrying those values is not asserted.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-payload-type-field: type
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationMessageMarker"
+    ServerSteMetadata:
+      name: server_ste_metadata
+      title: Server STE metadata
+      description: JSON data event identified by its type field; field-level schema is incomplete.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-payload-type-field: type
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationServerSteMetadata"
+    MessageStreamComplete:
+      name: message_stream_complete
+      title: Message stream complete
+      description: JSON data event identified by its type field.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-payload-type-field: type
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationMessageStreamComplete"
+    ConversationDetailMetadata:
+      name: conversation_detail_metadata
+      title: Conversation detail metadata
+      description: JSON data event identified by its type field; field-level schema is incomplete.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-payload-type-field: type
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDetailMetadata"
+    ConversationDoneMarker:
+      name: "[DONE]"
+      title: Stream completion sentinel
+      description: Literal terminal marker observed after the stream events.
+      contentType: text/plain
+      schemaFormat: "application/schema+json;version=draft-07"
+      x-stream-terminator: true
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDoneMarker"
+    FileProcessingEvent:
+      name: file-processing-event
+      title: File processing event
+      description: >
+        Newline-delimited JSON event from the captured file processing stream.
+        Progress is absent from the observed file.indexing.completed event.
+      contentType: application/json
+      schemaFormat: "application/schema+json;version=draft-07"
+      payload:
+        $ref: "./schemas/chat-stream-events.schema.json#/definitions/FileProcessingEvent"

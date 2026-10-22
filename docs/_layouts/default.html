@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ site.description | escape }}">
+    <title>{{ page.title | escape }} – {{ site.title | escape }}</title>
+    <style>
+        html { box-sizing: border-box; }
+        *, *::before, *::after { box-sizing: inherit; }
+        body { margin: 0; color: #202124; background: #fafafa; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+        .site-header { background: #fff; border-bottom: 1px solid #dadce0; }
+        .site-header-inner { max-width: 1100px; margin: 0 auto; padding: 14px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+        .brand { color: #202124; font-weight: 700; text-decoration: none; white-space: nowrap; }
+        .site-nav { display: flex; flex-wrap: wrap; gap: 14px; }
+        .site-nav a { color: #174ea6; text-decoration: none; font-size: 14px; }
+        .content { max-width: 1100px; margin: 28px auto; padding: 0 20px 40px; }
+        h1, h2, h3 { line-height: 1.25; }
+        h1 { margin-top: 0; }
+        a { color: #174ea6; }
+        code { overflow-wrap: anywhere; background: #f0f2f5; padding: 2px 4px; border-radius: 4px; }
+        pre { overflow-x: auto; padding: 14px; background: #f0f2f5; border-radius: 8px; }
+        table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; }
+        th, td { border: 1px solid #dadce0; padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background: #f0f2f5; }
+        blockquote { border-left: 3px solid #dadce0; margin-left: 0; padding-left: 16px; color: #5f6368; }
+        .footer { border-top: 1px solid #dadce0; color: #5f6368; font-size: 13px; padding: 18px 20px; text-align: center; }
+        @media (max-width: 720px) { .site-header-inner { align-items: flex-start; flex-direction: column; gap: 10px; } .site-nav { gap: 10px 14px; } .content { margin-top: 20px; } }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="./index.html">GPT – API-Dokumentation</a>
+            <nav class="site-nav" aria-label="Dokumentation">
+                <a href="./index.html">OpenAPI / Swagger UI</a>
+                <a href="./asyncapi.html">AsyncAPI / Streams</a>
+                <a href="./hooks.html">Browser-Hooks</a>
+                <a href="./observations.html">HAR-Beobachtungen</a>
+                <a href="./specification.html">Hinweise</a>
+            </nav>
+        </div>
+    </header>
+    <main class="content">
+        <h1>{{ page.title | escape }}</h1>
+        {{ content }}
+    </main>
+    <footer class="footer">Reverse-engineered HAR observations. Not an official or stable OpenAI API contract.</footer>
+</body>
+</html>

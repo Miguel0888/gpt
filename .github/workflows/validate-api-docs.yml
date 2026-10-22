@@ -1,0 +1,40 @@
+name: Validate API documentation
+
+on:
+  push:
+    branches:
+      - main
+      - docs/chatgpt-openapi-har-20261022
+    paths:
+      - "docs/**"
+      - "scripts/validate_docs.py"
+      - ".github/workflows/validate-api-docs.yml"
+  pull_request:
+    paths:
+      - "docs/**"
+      - "scripts/validate_docs.py"
+      - ".github/workflows/validate-api-docs.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check documentation paths and JSON Schemas
+        run: python scripts/validate_docs.py
+      - name: Validate AsyncAPI
+        run: npx --yes @asyncapi/cli@5.0.7 validate docs/asyncapi.yaml --fail-severity error
+      - name: Lint OpenAPI
+        run: npx --yes @redocly/cli lint docs/openapi.yaml
