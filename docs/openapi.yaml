@@ -34,7 +34,6 @@ paths:
       x-request-host: "codex-cloud-backend.chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["101"]
         entriesWithoutHttpStatus: 0
       servers:
@@ -52,7 +51,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 8
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -64,8 +62,10 @@ paths:
                 type: "object"
                 properties:
                   account_ordering:
-                                      accounts:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  accounts:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/accounts/optimized/check":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -75,7 +75,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -87,9 +86,12 @@ paths:
                 type: "object"
                 properties:
                   account:
-                                      account_user:
-                                      features:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  account_user:
+                    x-field-listed: true
+                  features:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/aip/connectors/{connectorId}":
     get:
       tags: ["Connectors und Plugins"]
@@ -99,7 +101,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 2
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -108,7 +109,7 @@ paths:
           required: true
           schema:
             type: "string"
-                  - name: "include_actions"
+        - name: "include_actions"
           in: "query"
           required: false
           schema:
@@ -122,42 +123,78 @@ paths:
                 type: "object"
                 properties:
                   action_param_schemas:
-                                      actions:
-                                      actions_changed_since_review:
-                                      app_metadata:
-                                      apps_privacy_control:
-                                      available_controls:
-                                      base_url:
-                                      branding:
-                                      connector_type:
-                                      created_at:
-                                      description:
-                                      developer_type:
-                                      disable_in_temporary_chat:
-                                      distribution_channel:
-                                      enable_multi_links:
-                                      icon_assets:
-                                      icon_dark_assets:
-                                      id:
-                                      keywords_for_discovery:
-                                      labels:
-                                      link_params_overrides:
-                                      link_params_schema:
-                                      logo_url:
-                                      logo_url_dark:
-                                      model_description:
-                                      name:
-                                      owners:
-                                      policy_info:
-                                      service:
-                                      status:
-                                      supported_auth:
-                                                          supports_oauth_owner_profile_id:
-                                                          sync_metadata:
-                                      template_id:
-                                      tunnel_id:
-                                      updated_at:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  actions:
+                    x-field-listed: true
+                  actions_changed_since_review:
+                    x-field-listed: true
+                  app_metadata:
+                    x-field-listed: true
+                  apps_privacy_control:
+                    x-field-listed: true
+                  available_controls:
+                    x-field-listed: true
+                  base_url:
+                    x-field-listed: true
+                  branding:
+                    x-field-listed: true
+                  connector_type:
+                    x-field-listed: true
+                  created_at:
+                    x-field-listed: true
+                  description:
+                    x-field-listed: true
+                  developer_type:
+                    x-field-listed: true
+                  disable_in_temporary_chat:
+                    x-field-listed: true
+                  distribution_channel:
+                    x-field-listed: true
+                  enable_multi_links:
+                    x-field-listed: true
+                  icon_assets:
+                    x-field-listed: true
+                  icon_dark_assets:
+                    x-field-listed: true
+                  id:
+                    x-field-listed: true
+                  keywords_for_discovery:
+                    x-field-listed: true
+                  labels:
+                    x-field-listed: true
+                  link_params_overrides:
+                    x-field-listed: true
+                  link_params_schema:
+                    x-field-listed: true
+                  logo_url:
+                    x-field-listed: true
+                  logo_url_dark:
+                    x-field-listed: true
+                  model_description:
+                    x-field-listed: true
+                  name:
+                    x-field-listed: true
+                  owners:
+                    x-field-listed: true
+                  policy_info:
+                    x-field-listed: true
+                  service:
+                    x-field-listed: true
+                  status:
+                    x-field-listed: true
+                  supported_auth:
+                    x-field-listed: true
+                  supports_oauth_owner_profile_id:
+                    x-field-listed: true
+                  sync_metadata:
+                    x-field-listed: true
+                  template_id:
+                    x-field-listed: true
+                  tunnel_id:
+                    x-field-listed: true
+                  updated_at:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/aip/connectors/links/list_accessible":
     post:
       tags: ["Connectors und Plugins"]
@@ -167,20 +204,21 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 link_refresh_strategy:
-                                  principals:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                principals:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -189,7 +227,8 @@ paths:
                 type: "object"
                 properties:
                   links:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/aip/first-party/eligibility":
     get:
       tags: ["Connectors und Plugins"]
@@ -199,7 +238,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -211,10 +249,14 @@ paths:
                 type: "object"
                 properties:
                   finances:
-                                      finances_eligibility:
-                                      health:
-                                      health_eligibility:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  finances_eligibility:
+                    x-field-listed: true
+                  health:
+                    x-field-listed: true
+                  health_eligibility:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/aip/workspace/connector-recommendation":
     get:
       tags: ["Connectoren und Empfehlungen"]
@@ -224,7 +266,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -236,11 +277,16 @@ paths:
                 type: "object"
                 properties:
                   connector_id:
-                                      reason:
-                                      google_drive_count:
-                                      sharepoint_count:
-                                      mx_provider:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  reason:
+                    x-field-listed: true
+                  google_drive_count:
+                    x-field-listed: true
+                  sharepoint_count:
+                    x-field-listed: true
+                  mx_provider:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/amphora/clear_settings_cache":
     post:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -250,17 +296,16 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               additionalProperties: true
-                    responses:
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -269,7 +314,8 @@ paths:
                 type: "object"
                 properties:
                   success:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/amphora/notifications":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -279,7 +325,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 2
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -297,8 +342,10 @@ paths:
                 type: "object"
                 properties:
                   cursor:
-                                      items:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  items:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/beacons/home":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -308,7 +355,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 3
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -356,7 +402,8 @@ paths:
                 type: "object"
                 properties:
                   beacon_ui_response:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/celsius/ws/user":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -366,7 +413,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 3
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -379,7 +425,7 @@ paths:
                 properties:
                   {}
                 additionalProperties: true
-                  "/backend-api/codex/sites/access":
+  "/backend-api/codex/sites/access":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/codex/sites/access"
@@ -388,7 +434,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -400,7 +445,8 @@ paths:
                 type: "object"
                 properties:
                   enabled:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/codex/spo/dashboard/capabilities":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -410,7 +456,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["404"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -422,7 +467,8 @@ paths:
                 type: "object"
                 properties:
                   error:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/composer/items":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -432,7 +478,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -455,7 +500,8 @@ paths:
                 type: "object"
                 properties:
                   items:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/conversation/{conversationId}":
     patch:
       tags: ["Chats und Nachrichten"]
@@ -465,7 +511,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 3
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -474,16 +519,17 @@ paths:
           required: true
           schema:
             type: "string"
-                requestBody:
+      requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 gizmo_id:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -492,7 +538,8 @@ paths:
                 type: "object"
                 properties:
                   success:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/conversation/id/{conversationId}":
     delete:
       tags: ["Chats und Nachrichten"]
@@ -502,7 +549,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 2
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -511,7 +557,7 @@ paths:
           required: true
           schema:
             type: "string"
-                responses:
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -520,7 +566,8 @@ paths:
                 type: "object"
                 properties:
                   success:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/conversation/implicit_message_feedback":
     post:
       tags: ["Chat / Feedback"]
@@ -530,23 +577,27 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 conversation_id:
-                                                    message_id:
-                                                    source:
-                                  location:
-                                  feedback:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                message_id:
+                  x-field-listed: true
+                source:
+                  x-field-listed: true
+                location:
+                  x-field-listed: true
+                feedback:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -556,7 +607,7 @@ paths:
                 properties:
                   {}
                 additionalProperties: true
-                  "/backend-api/conversation/init":
+  "/backend-api/conversation/init":
     post:
       tags: ["Chats und Nachrichten"]
       summary: "Chats und Nachrichten: POST /backend-api/conversation/init"
@@ -565,25 +616,31 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 9
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 conversation_id:
-                                                    conversation_origin:
-                                  gizmo_id:
-                                  requested_default_model:
-                                  system_hints:
-                                  timezone:
-                                  timezone_offset_min:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                conversation_origin:
+                  x-field-listed: true
+                gizmo_id:
+                  x-field-listed: true
+                requested_default_model:
+                  x-field-listed: true
+                system_hints:
+                  x-field-listed: true
+                timezone:
+                  x-field-listed: true
+                timezone_offset_min:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -592,14 +649,22 @@ paths:
                 type: "object"
                 properties:
                   atlas_mode_enabled:
-                                      banner_info:
-                                      blocked_features:
-                                      default_model_slug:
-                                      intended_default_model_slug:
-                                      limits_progress:
-                                      model_limits:
-                                      type:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  banner_info:
+                    x-field-listed: true
+                  blocked_features:
+                    x-field-listed: true
+                  default_model_slug:
+                    x-field-listed: true
+                  intended_default_model_slug:
+                    x-field-listed: true
+                  limits_progress:
+                    x-field-listed: true
+                  model_limits:
+                    x-field-listed: true
+                  type:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/conversations":
     get:
       tags: ["Chats und Nachrichten"]
@@ -609,7 +674,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 16
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -667,10 +731,14 @@ paths:
                 type: "object"
                 properties:
                   items:
-                                      limit:
-                                      offset:
-                                      total:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  limit:
+                    x-field-listed: true
+                  offset:
+                    x-field-listed: true
+                  total:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/conversations/{conversationId}":
     get:
       tags: ["Chats und Nachrichten"]
@@ -680,7 +748,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 6
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -689,7 +756,7 @@ paths:
           required: true
           schema:
             type: "string"
-                  - name: "include_has_versions"
+        - name: "include_has_versions"
           in: "query"
           required: false
           schema:
@@ -708,40 +775,74 @@ paths:
                 type: "object"
                 properties:
                   async_status:
-                                      atlas_mode_enabled:
-                                      blocked_urls:
-                                      context_scopes:
-                                      context_truncation_continuation:
-                                      conversation_id:
-                                                          conversation_origin:
-                                      conversation_template_id:
-                                      create_time:
-                                      current_node:
-                                      default_model_slug:
-                                      disabled_tool_ids:
-                                      gizmo_id:
-                                      gizmo_type:
-                                      is_archived:
-                                      is_do_not_remember:
-                                      is_read_only:
-                                      is_starred:
-                                      is_study_mode:
-                                      is_temporary_chat:
-                                      memory_scope:
-                                      messages:
-                                                          moderation_results:
-                                      owner:
-                                      page_info:
-                                      pinned_time:
-                                      plugin_ids:
-                                      safe_urls:
-                                      sectioned_conversation:
-                                      sugar_item_id:
-                                      sugar_item_visible:
-                                      title:
-                                      update_time:
-                                      voice:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  atlas_mode_enabled:
+                    x-field-listed: true
+                  blocked_urls:
+                    x-field-listed: true
+                  context_scopes:
+                    x-field-listed: true
+                  context_truncation_continuation:
+                    x-field-listed: true
+                  conversation_id:
+                    x-field-listed: true
+                  conversation_origin:
+                    x-field-listed: true
+                  conversation_template_id:
+                    x-field-listed: true
+                  create_time:
+                    x-field-listed: true
+                  current_node:
+                    x-field-listed: true
+                  default_model_slug:
+                    x-field-listed: true
+                  disabled_tool_ids:
+                    x-field-listed: true
+                  gizmo_id:
+                    x-field-listed: true
+                  gizmo_type:
+                    x-field-listed: true
+                  is_archived:
+                    x-field-listed: true
+                  is_do_not_remember:
+                    x-field-listed: true
+                  is_read_only:
+                    x-field-listed: true
+                  is_starred:
+                    x-field-listed: true
+                  is_study_mode:
+                    x-field-listed: true
+                  is_temporary_chat:
+                    x-field-listed: true
+                  memory_scope:
+                    x-field-listed: true
+                  messages:
+                    x-field-listed: true
+                  moderation_results:
+                    x-field-listed: true
+                  owner:
+                    x-field-listed: true
+                  page_info:
+                    x-field-listed: true
+                  pinned_time:
+                    x-field-listed: true
+                  plugin_ids:
+                    x-field-listed: true
+                  safe_urls:
+                    x-field-listed: true
+                  sectioned_conversation:
+                    x-field-listed: true
+                  sugar_item_id:
+                    x-field-listed: true
+                  sugar_item_visible:
+                    x-field-listed: true
+                  title:
+                    x-field-listed: true
+                  update_time:
+                    x-field-listed: true
+                  voice:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/dictation/stream":
     get:
       tags: ["Spracheingabe / Diktat"]
@@ -751,7 +852,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["101"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -773,7 +873,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
@@ -796,9 +895,12 @@ paths:
                 type: "object"
                 properties:
                   asset_pointer:
-                                                          asset_ttl:
-                                      asset_format:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  asset_ttl:
+                    x-field-listed: true
+                  asset_format:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/estuary/content":
     get:
       tags: ["Dateien"]
@@ -808,7 +910,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -864,37 +965,55 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 6
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 1
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 action:
-                                  client_contextual_info:
-                                  client_prepare_state:
-                                  conversation_id:
-                                                    conversation_mode:
-                                  genui_state_snapshots:
-                                  gizmo_id:
-                                  is_do_not_remember:
-                                  local_function_names:
-                                  messages:
-                                                    model:
-                                  one_off_model_override:
-                                  parent_message_id:
-                                                    requested_default_model:
-                                  supported_encodings:
-                                  thinking_effort:
-                                  timezone:
-                                  timezone_offset_min:
-                                  turn_attribution:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                client_contextual_info:
+                  x-field-listed: true
+                client_prepare_state:
+                  x-field-listed: true
+                conversation_id:
+                  x-field-listed: true
+                conversation_mode:
+                  x-field-listed: true
+                genui_state_snapshots:
+                  x-field-listed: true
+                gizmo_id:
+                  x-field-listed: true
+                is_do_not_remember:
+                  x-field-listed: true
+                local_function_names:
+                  x-field-listed: true
+                messages:
+                  x-field-listed: true
+                model:
+                  x-field-listed: true
+                one_off_model_override:
+                  x-field-listed: true
+                parent_message_id:
+                  x-field-listed: true
+                requested_default_model:
+                  x-field-listed: true
+                supported_encodings:
+                  x-field-listed: true
+                thinking_effort:
+                  x-field-listed: true
+                timezone:
+                  x-field-listed: true
+                timezone_offset_min:
+                  x-field-listed: true
+                turn_attribution:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -924,37 +1043,55 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 8
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 action:
-                                  client_contextual_info:
-                                  client_prepare_dispatch:
-                                  client_prepare_source:
-                                  client_prepare_state:
-                                  conversation_id:
-                                                    conversation_mode:
-                                  gizmo_id:
-                                  is_do_not_remember:
-                                  local_function_names:
-                                  model:
-                                  one_off_model_override:
-                                  parent_message_id:
-                                                    partial_query:
-                                                    requested_default_model:
-                                  supported_encodings:
-                                  thinking_effort:
-                                  timezone:
-                                  timezone_offset_min:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                client_contextual_info:
+                  x-field-listed: true
+                client_prepare_dispatch:
+                  x-field-listed: true
+                client_prepare_source:
+                  x-field-listed: true
+                client_prepare_state:
+                  x-field-listed: true
+                conversation_id:
+                  x-field-listed: true
+                conversation_mode:
+                  x-field-listed: true
+                gizmo_id:
+                  x-field-listed: true
+                is_do_not_remember:
+                  x-field-listed: true
+                local_function_names:
+                  x-field-listed: true
+                model:
+                  x-field-listed: true
+                one_off_model_override:
+                  x-field-listed: true
+                parent_message_id:
+                  x-field-listed: true
+                partial_query:
+                  x-field-listed: true
+                requested_default_model:
+                  x-field-listed: true
+                supported_encodings:
+                  x-field-listed: true
+                thinking_effort:
+                  x-field-listed: true
+                timezone:
+                  x-field-listed: true
+                timezone_offset_min:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -963,8 +1100,10 @@ paths:
                 type: "object"
                 properties:
                   conduit_token:
-                                                          status:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  status:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/files":
     post:
       tags: ["Dateien"]
@@ -974,26 +1113,33 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 file_name:
-                                  file_size:
-                                  gizmo_id:
-                                  mime_type:
-                                  reset_rate_limits:
-                                  supports_direct_azure_multipart:
-                                  timezone_offset_min:
-                                  use_case:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                file_size:
+                  x-field-listed: true
+                gizmo_id:
+                  x-field-listed: true
+                mime_type:
+                  x-field-listed: true
+                reset_rate_limits:
+                  x-field-listed: true
+                supports_direct_azure_multipart:
+                  x-field-listed: true
+                timezone_offset_min:
+                  x-field-listed: true
+                use_case:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -1002,9 +1148,12 @@ paths:
                 type: "object"
                 properties:
                   file_id:
-                                                          status:
-                                      upload_url:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  status:
+                    x-field-listed: true
+                  upload_url:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/files/download/{fileId}":
     get:
       tags: ["Dateien"]
@@ -1014,7 +1163,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1023,7 +1171,7 @@ paths:
           required: true
           schema:
             type: "string"
-                  - name: "download_intent"
+        - name: "download_intent"
           in: "query"
           required: false
           schema:
@@ -1042,14 +1190,22 @@ paths:
                 type: "object"
                 properties:
                   creation_time:
-                                      download_url:
-                                      file_name:
-                                      file_size_bytes:
-                                      metadata:
-                                      mime_type:
-                                      no_auth_user_upload:
-                                                          status:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  download_url:
+                    x-field-listed: true
+                  file_name:
+                    x-field-listed: true
+                  file_size_bytes:
+                    x-field-listed: true
+                  metadata:
+                    x-field-listed: true
+                  mime_type:
+                    x-field-listed: true
+                  no_auth_user_upload:
+                    x-field-listed: true
+                  status:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/files/process_upload_stream":
     post:
       tags: ["Dateien"]
@@ -1059,25 +1215,31 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 entry_surface:
-                                  file_id:
-                                                    file_name:
-                                  gizmo_id:
-                                  index_for_retrieval:
-                                  mime_type:
-                                  use_case:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                file_id:
+                  x-field-listed: true
+                file_name:
+                  x-field-listed: true
+                gizmo_id:
+                  x-field-listed: true
+                index_for_retrieval:
+                  x-field-listed: true
+                mime_type:
+                  x-field-listed: true
+                use_case:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -1098,7 +1260,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 3
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1107,7 +1268,7 @@ paths:
           required: true
           schema:
             type: "string"
-                  - name: "include_file_limits"
+        - name: "include_file_limits"
           in: "query"
           required: false
           schema:
@@ -1121,13 +1282,20 @@ paths:
                 type: "object"
                 properties:
                   files:
-                                      gizmo:
-                                      has_tpp_conversation:
-                                      product_features:
-                                      project_connector_scope_limits:
-                                      project_file_limits:
-                                      tools:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  gizmo:
+                    x-field-listed: true
+                  has_tpp_conversation:
+                    x-field-listed: true
+                  product_features:
+                    x-field-listed: true
+                  project_connector_scope_limits:
+                    x-field-listed: true
+                  project_file_limits:
+                    x-field-listed: true
+                  tools:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/gizmos/{projectId}/conversations":
     get:
       tags: ["Projekte und Seitenleiste"]
@@ -1137,7 +1305,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 20
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1146,7 +1313,7 @@ paths:
           required: true
           schema:
             type: "string"
-                  - name: "limit"
+        - name: "limit"
           in: "query"
           required: false
           schema:
@@ -1165,8 +1332,10 @@ paths:
                 type: "object"
                 properties:
                   cursor:
-                                      items:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  items:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/gizmos/snorlax/sidebar":
     get:
       tags: ["Projekte und Seitenleiste"]
@@ -1176,7 +1345,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 4
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 1
       parameters:
@@ -1209,8 +1377,10 @@ paths:
                 type: "object"
                 properties:
                   cursor:
-                                      items:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  items:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/hazelnuts":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1220,7 +1390,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1243,7 +1412,8 @@ paths:
                 type: "object"
                 properties:
                   hazelnuts:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/live/conversations/{conversationId}/session-sharing":
     get:
       tags: ["Live und Freigabe"]
@@ -1253,7 +1423,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1262,7 +1431,7 @@ paths:
           required: true
           schema:
             type: "string"
-                responses:
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -1271,8 +1440,10 @@ paths:
                 type: "object"
                 properties:
                   av_sessions:
-                                      can_share:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  can_share:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/me":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1282,7 +1453,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 2
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -1294,30 +1464,54 @@ paths:
                 type: "object"
                 properties:
                   ads_segment_id:
-                                      amr:
-                                      chatgpt_eval_data:
-                                      claimed_domain_org_id:
-                                      client_id:
-                                      country:
-                                      created:
-                                      email:
-                                                          email_domain_type:
-                                                          first_name:
-                                      groups:
-                                      has_payg_project_spend_limit:
-                                      id:
-                                      is_test_user:
-                                      mfa_flag_enabled:
-                                      name:
-                                      object:
-                                      orgs:
-                                      phone_number:
-                                      picture:
-                                      region:
-                                      region_code:
-                                      signup_attribution:
-                                                          tenants:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  amr:
+                    x-field-listed: true
+                  chatgpt_eval_data:
+                    x-field-listed: true
+                  claimed_domain_org_id:
+                    x-field-listed: true
+                  client_id:
+                    x-field-listed: true
+                  country:
+                    x-field-listed: true
+                  created:
+                    x-field-listed: true
+                  email:
+                    x-field-listed: true
+                  email_domain_type:
+                    x-field-listed: true
+                  first_name:
+                    x-field-listed: true
+                  groups:
+                    x-field-listed: true
+                  has_payg_project_spend_limit:
+                    x-field-listed: true
+                  id:
+                    x-field-listed: true
+                  is_test_user:
+                    x-field-listed: true
+                  mfa_flag_enabled:
+                    x-field-listed: true
+                  name:
+                    x-field-listed: true
+                  object:
+                    x-field-listed: true
+                  orgs:
+                    x-field-listed: true
+                  phone_number:
+                    x-field-listed: true
+                  picture:
+                    x-field-listed: true
+                  region:
+                    x-field-listed: true
+                  region_code:
+                    x-field-listed: true
+                  signup_attribution:
+                    x-field-listed: true
+                  tenants:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/models":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1327,7 +1521,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 3
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1355,15 +1548,24 @@ paths:
                 type: "object"
                 properties:
                   categories:
-                                      default_model_slug:
-                                      icons:
-                                      internal_groups:
-                                      model_picker_version:
-                                      models:
-                                      secondary_title:
-                                      title:
-                                      versions:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  default_model_slug:
+                    x-field-listed: true
+                  icons:
+                    x-field-listed: true
+                  internal_groups:
+                    x-field-listed: true
+                  model_picker_version:
+                    x-field-listed: true
+                  models:
+                    x-field-listed: true
+                  secondary_title:
+                    x-field-listed: true
+                  title:
+                    x-field-listed: true
+                  versions:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/pageConfigs/billing":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1373,7 +1575,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -1385,15 +1586,24 @@ paths:
                 type: "object"
                 properties:
                   account:
-                                      balance:
-                                      banners:
-                                      billing_information:
-                                      credits:
-                                      free_workspace_upgrade:
-                                      invite_prepurchase:
-                                      plan_management:
-                                      usage_limits:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  balance:
+                    x-field-listed: true
+                  banners:
+                    x-field-listed: true
+                  billing_information:
+                    x-field-listed: true
+                  credits:
+                    x-field-listed: true
+                  free_workspace_upgrade:
+                    x-field-listed: true
+                  invite_prepurchase:
+                    x-field-listed: true
+                  plan_management:
+                    x-field-listed: true
+                  usage_limits:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/pins":
     get:
       tags: ["Projekte und Seitenleiste"]
@@ -1403,7 +1613,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 9
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1432,7 +1641,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -1444,8 +1652,10 @@ paths:
                 type: "object"
                 properties:
                   profile_details:
-                                      viewer_access:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  viewer_access:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/projects":
     post:
       tags: ["Projekte und Seitenleiste"]
@@ -1455,23 +1665,27 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 emoji:
-                                  instructions:
-                                  memory_scope:
-                                  name:
-                                  theme:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                instructions:
+                  x-field-listed: true
+                memory_scope:
+                  x-field-listed: true
+                name:
+                  x-field-listed: true
+                theme:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -1480,9 +1694,12 @@ paths:
                 type: "object"
                 properties:
                   error:
-                                      resource:
-                                      sharing_targets:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  resource:
+                    x-field-listed: true
+                  sharing_targets:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/projects/{projectId}/connector_scopes":
     get:
       tags: ["Projekte und Seitenleiste"]
@@ -1492,7 +1709,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1501,7 +1717,7 @@ paths:
           required: true
           schema:
             type: "string"
-                  - name: "limit"
+        - name: "limit"
           in: "query"
           required: false
           schema:
@@ -1515,9 +1731,12 @@ paths:
                 type: "object"
                 properties:
                   cursor:
-                                      items:
-                                      project_connectors_enabled:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  items:
+                    x-field-listed: true
+                  project_connectors_enabled:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/projects/{projectId}/files":
     post:
       tags: ["Projekte und Seitenleiste"]
@@ -1527,7 +1746,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1536,16 +1754,17 @@ paths:
           required: true
           schema:
             type: "string"
-                requestBody:
+      requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 files:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -1554,7 +1773,8 @@ paths:
                 type: "object"
                 properties:
                   resource:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/projects/{projectId}/files/{fileId}":
     delete:
       tags: ["Projekte und Seitenleiste"]
@@ -1564,7 +1784,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1573,12 +1792,12 @@ paths:
           required: true
           schema:
             type: "string"
-                  - name: "fileId"
+        - name: "fileId"
           in: "path"
           required: true
           schema:
             type: "string"
-                responses:
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -1587,7 +1806,8 @@ paths:
                 type: "object"
                 properties:
                   resource:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/projects/{projectId}/saves":
     get:
       tags: ["Projekte und Seitenleiste"]
@@ -1597,7 +1817,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 2
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1606,7 +1825,7 @@ paths:
           required: true
           schema:
             type: "string"
-                  - name: "limit"
+        - name: "limit"
           in: "query"
           required: false
           schema:
@@ -1620,8 +1839,10 @@ paths:
                 type: "object"
                 properties:
                   cursor:
-                                      items:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  items:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/prompt_library/":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1631,7 +1852,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1659,12 +1879,18 @@ paths:
                 type: "object"
                 properties:
                   greeting:
-                                      items:
-                                      limit:
-                                      offset:
-                                      total:
-                                      ui_style:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  items:
+                    x-field-listed: true
+                  limit:
+                    x-field-listed: true
+                  offset:
+                    x-field-listed: true
+                  total:
+                    x-field-listed: true
+                  ui_style:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/ps/plugins/home":
     get:
       tags: ["Connectors und Plugins"]
@@ -1674,7 +1900,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -1686,7 +1911,8 @@ paths:
                 type: "object"
                 properties:
                   sections:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/ps/plugins/installed":
     get:
       tags: ["Connectors und Plugins"]
@@ -1696,7 +1922,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1719,8 +1944,10 @@ paths:
                 type: "object"
                 properties:
                   pagination:
-                                      plugins:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  plugins:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/sentinel/chat-requirements/finalize":
     post:
       tags: ["Schutz und Anfrageprüfung"]
@@ -1730,21 +1957,23 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 6
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 prepare_token:
-                                                    proofofwork:
-                                  turnstile:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                proofofwork:
+                  x-field-listed: true
+                turnstile:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -1753,10 +1982,14 @@ paths:
                 type: "object"
                 properties:
                   expire_after:
-                                      expire_at:
-                                      persona:
-                                      token:
-                                                        additionalProperties: true
+                    x-field-listed: true
+                  expire_at:
+                    x-field-listed: true
+                  persona:
+                    x-field-listed: true
+                  token:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/sentinel/chat-requirements/prepare":
     post:
       tags: ["Schutz und Anfrageprüfung"]
@@ -1766,19 +1999,19 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 7
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 p:
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -1787,11 +2020,16 @@ paths:
                 type: "object"
                 properties:
                   persona:
-                                      prepare_token:
-                                                          proofofwork:
-                                      so:
-                                      turnstile:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  prepare_token:
+                    x-field-listed: true
+                  proofofwork:
+                    x-field-listed: true
+                  so:
+                    x-field-listed: true
+                  turnstile:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/settings/is_adult":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1801,7 +2039,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 5
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -1813,12 +2050,18 @@ paths:
                 type: "object"
                 properties:
                   age_is_known:
-                                      age_status:
-                                      has_verified_age_or_dob:
-                                      is_adult:
-                                      is_u18_model_policy_enabled:
-                                      show_age_verification_setting:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  age_status:
+                    x-field-listed: true
+                  has_verified_age_or_dob:
+                    x-field-listed: true
+                  is_adult:
+                    x-field-listed: true
+                  is_u18_model_policy_enabled:
+                    x-field-listed: true
+                  show_age_verification_setting:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/settings/user":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1828,7 +2071,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 2
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -1840,15 +2082,24 @@ paths:
                 type: "object"
                 properties:
                   announcements:
-                                      available_options:
-                                      beta_settings:
-                                      eligible_announcement_strings:
-                                      eligible_announcements:
-                                      flags:
-                                      permissions:
-                                      persistent_announcements:
-                                      settings:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  available_options:
+                    x-field-listed: true
+                  beta_settings:
+                    x-field-listed: true
+                  eligible_announcement_strings:
+                    x-field-listed: true
+                  eligible_announcements:
+                    x-field-listed: true
+                  flags:
+                    x-field-listed: true
+                  permissions:
+                    x-field-listed: true
+                  persistent_announcements:
+                    x-field-listed: true
+                  settings:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/subscriptions":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1858,7 +2109,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1876,34 +2126,62 @@ paths:
                 type: "object"
                 properties:
                   active_start:
-                                      active_until:
-                                      assigned:
-                                                          became_delinquent_timestamp:
-                                      billing_currency:
-                                      billing_period:
-                                      cancellation_outcome:
-                                      current_billing_period:
-                                      entitlement:
-                                      from_webview:
-                                      grace_period_end_timestamp:
-                                      id:
-                                      is_active:
-                                      is_delinquent:
-                                      is_processor_stripe:
-                                      last_active_subscription:
-                                      last_credit_grant_update:
-                                      next_credit_grant_update:
-                                      non_profit_org_discount_applied:
-                                      plan_type:
-                                      price_country:
-                                      pricing_scope:
-                                      scheduled_billing_period:
-                                      seat_capacity:
-                                      seats_entitled:
-                                      seats_in_use:
-                                      use_non_profit_pricing:
-                                      will_renew:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  active_until:
+                    x-field-listed: true
+                  assigned:
+                    x-field-listed: true
+                  became_delinquent_timestamp:
+                    x-field-listed: true
+                  billing_currency:
+                    x-field-listed: true
+                  billing_period:
+                    x-field-listed: true
+                  cancellation_outcome:
+                    x-field-listed: true
+                  current_billing_period:
+                    x-field-listed: true
+                  entitlement:
+                    x-field-listed: true
+                  from_webview:
+                    x-field-listed: true
+                  grace_period_end_timestamp:
+                    x-field-listed: true
+                  id:
+                    x-field-listed: true
+                  is_active:
+                    x-field-listed: true
+                  is_delinquent:
+                    x-field-listed: true
+                  is_processor_stripe:
+                    x-field-listed: true
+                  last_active_subscription:
+                    x-field-listed: true
+                  last_credit_grant_update:
+                    x-field-listed: true
+                  next_credit_grant_update:
+                    x-field-listed: true
+                  non_profit_org_discount_applied:
+                    x-field-listed: true
+                  plan_type:
+                    x-field-listed: true
+                  price_country:
+                    x-field-listed: true
+                  pricing_scope:
+                    x-field-listed: true
+                  scheduled_billing_period:
+                    x-field-listed: true
+                  seat_capacity:
+                    x-field-listed: true
+                  seats_entitled:
+                    x-field-listed: true
+                  seats_in_use:
+                    x-field-listed: true
+                  use_non_profit_pricing:
+                    x-field-listed: true
+                  will_renew:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/system_hints":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1913,7 +2191,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 11
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1941,7 +2218,8 @@ paths:
                 type: "object"
                 properties:
                   system_hints:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/tpp/default-tab-recommendation":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -1951,7 +2229,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -1964,7 +2241,7 @@ paths:
                 properties:
                   {}
                 additionalProperties: true
-                  "/backend-api/tpp/models/":
+  "/backend-api/tpp/models/":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/tpp/models/"
@@ -1973,7 +2250,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 3
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -1996,20 +2272,34 @@ paths:
                 type: "object"
                 properties:
                   categories:
-                                      default_model_slug:
-                                      default_slider_upgrades:
-                                      eligible_codex_model_slugs:
-                                      icons:
-                                      internal_groups:
-                                      model_picker_version:
-                                      model_upgrades:
-                                      models:
-                                      secondary_title:
-                                      slider_settings:
-                                      title:
-                                      versions:
-                                      workspace_model_policy:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  default_model_slug:
+                    x-field-listed: true
+                  default_slider_upgrades:
+                    x-field-listed: true
+                  eligible_codex_model_slugs:
+                    x-field-listed: true
+                  icons:
+                    x-field-listed: true
+                  internal_groups:
+                    x-field-listed: true
+                  model_picker_version:
+                    x-field-listed: true
+                  model_upgrades:
+                    x-field-listed: true
+                  models:
+                    x-field-listed: true
+                  secondary_title:
+                    x-field-listed: true
+                  slider_settings:
+                    x-field-listed: true
+                  title:
+                    x-field-listed: true
+                  versions:
+                    x-field-listed: true
+                  workspace_model_policy:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/user_granular_consent":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -2019,7 +2309,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -2031,8 +2320,10 @@ paths:
                 type: "object"
                 properties:
                   granular_consent:
-                                      is_consent_required:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  is_consent_required:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/user_system_messages":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
@@ -2042,7 +2333,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -2054,18 +2344,30 @@ paths:
                 type: "object"
                 properties:
                   about_model_message:
-                                                          about_user_message:
-                                                          disabled_tools:
-                                      enabled:
-                                      name_user_message:
-                                                          object:
-                                      other_user_message:
-                                                          personality_traits:
-                                      personality_type_selection:
-                                      role_user_message:
-                                                          traits_enabled:
-                                      traits_model_message:
-                                                        additionalProperties: true
+                    x-field-listed: true
+                  about_user_message:
+                    x-field-listed: true
+                  disabled_tools:
+                    x-field-listed: true
+                  enabled:
+                    x-field-listed: true
+                  name_user_message:
+                    x-field-listed: true
+                  object:
+                    x-field-listed: true
+                  other_user_message:
+                    x-field-listed: true
+                  personality_traits:
+                    x-field-listed: true
+                  personality_type_selection:
+                    x-field-listed: true
+                  role_user_message:
+                    x-field-listed: true
+                  traits_enabled:
+                    x-field-listed: true
+                  traits_model_message:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/wham/accounts/check":
     get:
       tags: ["Work und Kontingente"]
@@ -2075,7 +2377,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -2087,9 +2388,12 @@ paths:
                 type: "object"
                 properties:
                   account_ordering:
-                                      accounts:
-                                      default_account_id:
-                                                        additionalProperties: true
+                    x-field-listed: true
+                  accounts:
+                    x-field-listed: true
+                  default_account_id:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/wham/analytics-events/events":
     post:
       tags: ["Telemetrie / Analytics"]
@@ -2099,20 +2403,21 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 "events (event_type":
-                                  "event_params)":
-                                additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                "event_params)":
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -2121,10 +2426,14 @@ paths:
                 type: "object"
                 properties:
                   status:
-                                      total_events:
-                                      accepted_events:
-                                      skipped_events:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  total_events:
+                    x-field-listed: true
+                  accepted_events:
+                    x-field-listed: true
+                  skipped_events:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/wham/tasks/list":
     get:
       tags: ["Work und Kontingente"]
@@ -2134,7 +2443,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 10
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 1
       parameters:
@@ -2157,8 +2465,10 @@ paths:
                 type: "object"
                 properties:
                   cursor:
-                                      items:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  items:
+                    x-field-listed: true
+                additionalProperties: true
   "/backend-api/wham/usage":
     get:
       tags: ["Work und Kontingente"]
@@ -2168,7 +2478,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 15
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
@@ -2180,19 +2489,32 @@ paths:
                 type: "object"
                 properties:
                   account_id:
-                                                          additional_rate_limits:
-                                      code_review_rate_limit:
-                                      credits:
-                                      email:
-                                                          model_usage:
-                                      plan_type:
-                                      promo:
-                                      rate_limit:
-                                      rate_limit_reached_type:
-                                      rate_limit_reset_credits:
-                                      spend_control:
-                                      user_id:
-                                                        additionalProperties: true
+                    x-field-listed: true
+                  additional_rate_limits:
+                    x-field-listed: true
+                  code_review_rate_limit:
+                    x-field-listed: true
+                  credits:
+                    x-field-listed: true
+                  email:
+                    x-field-listed: true
+                  model_usage:
+                    x-field-listed: true
+                  plan_type:
+                    x-field-listed: true
+                  promo:
+                    x-field-listed: true
+                  rate_limit:
+                    x-field-listed: true
+                  rate_limit_reached_type:
+                    x-field-listed: true
+                  rate_limit_reset_credits:
+                    x-field-listed: true
+                  spend_control:
+                    x-field-listed: true
+                  user_id:
+                    x-field-listed: true
+                additionalProperties: true
   "/ces/statsc/flush":
     post:
       tags: ["Telemetrie / Feature-Flags"]
@@ -2202,19 +2524,19 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 4
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 "gebündelte Statsig-Payload; Details nicht normalisiert":
-                                                  additionalProperties: true
-                    responses:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "200":
           description: "HTTP 200 response."
           content:
@@ -2223,7 +2545,8 @@ paths:
                 type: "object"
                 properties:
                   success:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/ces/v1/rgstr":
     post:
       tags: ["Telemetrie"]
@@ -2233,7 +2556,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 22
-
         statusCodes: ["202"]
         entriesWithoutHttpStatus: 1
       parameters:
@@ -2269,15 +2591,17 @@ paths:
             type: "string"
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
               properties:
                 events:
-                                  statsigMetadata:
-                                                  additionalProperties: true
-                    responses:
+                  x-field-listed: true
+                statsigMetadata:
+                  x-field-listed: true
+              additionalProperties: true
+      responses:
         "202":
           description: "Request accepted for asynchronous processing."
           content:
@@ -2286,7 +2610,8 @@ paths:
                 type: "object"
                 properties:
                   success:
-                                    additionalProperties: true
+                    x-field-listed: true
+                additionalProperties: true
   "/ces/v1/telemetry/intake":
     post:
       tags: ["Telemetrie"]
@@ -2296,12 +2621,11 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["202"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-                content:
+        content:
           "text/plain":
             schema:
               type: "string"
@@ -2315,8 +2639,10 @@ paths:
                 type: "object"
                 properties:
                   ok:
-                                      error:
-                                    additionalProperties: true
+                    x-field-listed: true
+                  error:
+                    x-field-listed: true
+                additionalProperties: true
   "/files/{fileId}/raw":
     options:
       tags: ["Dateien / externer Upload"]
@@ -2326,7 +2652,6 @@ paths:
       x-request-host: "sdmntprpolandcentral.oaiusercontent.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -2335,7 +2660,7 @@ paths:
           required: true
           schema:
             type: "string"
-                servers:
+      servers:
         - url: "https://sdmntprpolandcentral.oaiusercontent.com"
           description: "External storage host. Signed upload URL returned dynamically."
       responses:
@@ -2349,7 +2674,6 @@ paths:
       x-request-host: "sdmntprpolandcentral.oaiusercontent.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["201"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -2358,7 +2682,7 @@ paths:
           required: true
           schema:
             type: "string"
-                servers:
+      servers:
         - url: "https://sdmntprpolandcentral.oaiusercontent.com"
           description: "External storage host. Signed upload URL returned dynamically."
       requestBody:
@@ -2382,7 +2706,6 @@ paths:
       x-request-host: "ws.chatgpt.com"
       x-request-statistics:
         requestCount: 3
-
         statusCodes: ["101"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -2391,7 +2714,7 @@ paths:
           required: true
           schema:
             type: "string"
-                  - name: "verify"
+        - name: "verify"
           in: "query"
           required: false
           schema:
@@ -2411,7 +2734,6 @@ paths:
       x-request-host: "chatgpt.com"
       x-request-statistics:
         requestCount: 8
-
         statusCodes: ["201"]
         entriesWithoutHttpStatus: 0
       parameters:
@@ -2437,7 +2759,7 @@ paths:
             type: "string"
       requestBody:
         required: true
-                content:
+        content:
           "application/sdp":
             schema:
               type: "string"
@@ -2459,7 +2781,6 @@ paths:
       x-request-host: "ab.chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       servers:
@@ -2475,14 +2796,13 @@ paths:
       x-request-host: "ab.chatgpt.com"
       x-request-statistics:
         requestCount: 1
-
         statusCodes: ["204"]
         entriesWithoutHttpStatus: 0
       servers:
         - url: "https://ab.chatgpt.com"
       requestBody:
         required: true
-                content:
+        content:
           "application/json":
             schema:
               type: "object"
