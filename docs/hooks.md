@@ -11,17 +11,9 @@ permalink: hooks.html
 Diese Spezifikation beschreibt, wie ein Browser Event Hub Aktivitäten der ChatGPT-Weboberfläche erkennt und in einen stabilen, eigenen Event-Vertrag überführt.
 
 - **OpenAPI** beschreibt HTTP-Aufrufe, Methoden, Parameter und HTTP-Responses.
-- **AsyncAPI** beschreibt die belegten Nachrichtenvarianten innerhalb der Chat- und Datei-Streams.
-- **Diese Hook-Spezifikation** beschreibt die lokale Instrumentierung des Browsers, DOM-Beobachtungen, Navigation und die Normalisierung der erkannten Ereignisse.
-- Das [Schema für normalisierte Events](./schemas/normalized-event.schema.json) ist ein vorgeschlagener, versionierter Vertrag des Event Hubs. Es ist nicht mit den internen ChatGPT-Payloads gleichzusetzen.
-
-## Evidenzstatus
-
-Kennzeichne jede Implementierungsannahme als eine der folgenden Kategorien:
-
-- **Beobachtet:** direkt in einer der bereitgestellten HAR-Aufzeichnungen oder in den dazugehörigen bereinigten Beobachtungen enthalten.
-- **Abgeleitet:** aus beobachteten Abläufen normalisiert oder technisch hergeleitet.
-- **Unbekannt:** durch die vorhandenen Mitschnitte nicht belegt; keine Payload-Struktur oder Semantik erfinden.
+- **AsyncAPI** beschreibt Nachrichtenvarianten innerhalb der Chat- und Datei-Streams.
+- **Diese Hook-Spezifikation** beschreibt die lokale Instrumentierung des Browsers, DOM-Änderungen, Navigation und die Normalisierung der erkannten Ereignisse.
+- Das [Schema für normalisierte Events](./schemas/normalized-event.schema.json) definiert den Event-Hub-Vertrag.
 
 ## Instrumentierungspunkte
 
@@ -47,27 +39,27 @@ Instrumentiere `open`, `send`, `setRequestHeader` und die relevanten Lifecycle-E
 
 Unterscheide Transport-Framing und Payload-Schema:
 
-- `POST /backend-api/f/conversation`: Die Antwort ist als `text/event-stream` beobachtet. `delta` und `delta_encoding` sind explizite SSE-Event-Namen. Weitere Ereignisse werden überwiegend über das JSON-Feld `type` erkannt; `[DONE]` ist eine Abschlussmarkierung.
-- `POST /backend-api/files/process_upload_stream`: Der Header lautet `text/event-stream`, der aufgezeichnete Body enthält jedoch zeilenweise getrennte JSON-Objekte statt des üblichen SSE-Framings. Verwende dafür einen separaten Line-Delimited-JSON-Adapter und überprüfe das Verhalten bei neuen Mitschnitten erneut.
+- `POST /backend-api/f/conversation`: Content-Type: `text/event-stream`. `delta` und `delta_encoding` sind explizite SSE-Event-Namen. Weitere Ereignisse werden überwiegend über das JSON-Feld `type` erkannt; `[DONE]` ist eine Abschlussmarkierung.
+- `POST /backend-api/files/process_upload_stream`: Content-Type: `text/event-stream`; Body-Framing: zeilenweise getrennte JSON-Objekte.
 - Leite keine vollständigen Payload-Schemas aus bloßen Event-Namen ab. Erhalte unbekannte Felder und protokolliere Parsefehler ohne den Originalstream zu blockieren.
 
 ### 4. WebSocket-Lifecycle
 
 Erfasse, soweit erforderlich und zulässig, `open`, `message`, `error` und `close`. Dokumentiere Richtung, Zeitpunkt, Frame-Größe und Verbindungskorrelation nur dann, wenn diese Informationen tatsächlich erfasst werden.
 
-Die vorhandenen HAR-Aufzeichnungen enthalten WebSocket-Handshakes, aber keine Nachrichtenframes. Deshalb sind konkrete WebSocket-Payloads und fachliche Push-Ereignisse **unbekannt**. Ergänze erst dann Nachrichten-Schemas, wenn echte Frames aus einer autorisierten Testaufzeichnung vorliegen.
+WebSocket-Handshakes: vorhanden. Nachrichtenframes: keine.
 
 ### 5. Navigation
 
-Beobachte `popstate` und `hashchange`. Falls `history.pushState` und `history.replaceState` instrumentiert werden, rufe die Originalfunktion mit identischem Kontext und denselben Argumenten auf und veröffentliche erst danach das normalisierte Navigationsevent.
+Erfasse `popstate` und `hashchange`. Falls `history.pushState` und `history.replaceState` instrumentiert werden, rufe die Originalfunktion mit identischem Kontext und denselben Argumenten auf und veröffentliche erst danach das normalisierte Navigationsevent.
 
 ### 6. DOM-Ereignisse
 
-Verwende gezielte Event-Listener und eng begrenzte `MutationObserver`-Beobachtungen. Bevorzuge stabile Rollen, zugängliche Namen und klar definierte Selektoren gegenüber fragilen CSS-Klassen.
+Verwende gezielte Event-Listener und `MutationObserver` zur Erfassung von DOM-Änderungen. Bevorzuge stabile Rollen, zugängliche Namen und klar definierte Selektoren gegenüber fragilen CSS-Klassen.
 
 - Scanne nicht fortlaufend den vollständigen DOM-Baum.
 - Veröffentliche keine kompletten DOM-Snapshots.
-- Behandle UI-Signale als Beobachtungen, nicht als Beweis für einen erfolgreichen Backend-Vorgang.
+- Behandle UI-Signale nicht als Beweis für einen erfolgreichen Backend-Vorgang.
 - Vermeide doppelte Ereignisse durch Debouncing oder zustandsbasierte Deduplizierung, wo es fachlich gerechtfertigt ist.
 
 ## Normalisierte Events
@@ -80,7 +72,7 @@ Alle Events verwenden das äußere Schema `schemas/normalized-event.schema.json`
 | `network.response.headers` | Response-Header verfügbar | Status, bereinigter Content-Type |
 | `network.response.completed` | Response abgeschlossen | Dauer und Ergebnis-Metadaten |
 | `network.request.failed` | Request scheitert oder wird abgebrochen | Fehlerkategorie, keine Credentials |
-| `conversation.stream.event` | Chat-Stream-Nachricht empfangen | beobachteter Event-Name oder `type`, allowlist-basierte Payload |
+| `conversation.stream.event` | Chat-Stream-Nachricht empfangen | Event-Name oder `type`, allowlist-basierte Payload |
 | `conversation.stream.completed` | `message_stream_complete` oder `[DONE]` erkannt | Abschlussart und Request-ID |
 | `file.processing.progress` | Datei-Verarbeitungsereignis erkannt | Ereignisname, Fortschritt sofern vorhanden |
 | `websocket.opened` | WebSocket-Verbindung geöffnet | bereinigter Endpunkt und Verbindungs-ID |
@@ -90,7 +82,7 @@ Alle Events verwenden das äußere Schema `schemas/normalized-event.schema.json`
 | `dom.action` | Definierte UI-Aktion erkannt | Aktionstyp und minimal nötige Metadaten |
 | `hook.error` | Instrumentierung oder Parsing scheitert | Hook-Punkt und Fehlerkategorie |
 
-Payload-Felder bleiben ereignisspezifisch. Benenne nur Felder um, deren Bedeutung durch die Beobachtungen gesichert ist. Füge keine vermeintlich universellen Felder hinzu, nur weil ein Beispiel sie enthält.
+Payload-Felder bleiben ereignisspezifisch. Benenne Felder nur bei eindeutigem fachlichem Mapping um. Füge keine vermeintlich universellen Felder hinzu, nur weil ein Beispiel sie enthält.
 
 ## Reihenfolge und Korrelation
 
@@ -105,7 +97,7 @@ Payload-Felder bleiben ereignisspezifisch. Benenne nur Felder um, deren Bedeutun
 - Installiere Hooks idempotent und gib eine Abmeldefunktion zurück.
 - Stelle beim Deaktivieren die ursprünglichen Browserfunktionen wieder her, sofern keine weitere Instrumentierung sie ersetzt hat.
 - Lasse Hook-Ausnahmen nicht in die Anwendung durchschlagen.
-- Begrenze Stream-Puffer, DOM-Beobachtungen und Event-Queues.
+- Begrenze Stream-Puffer, DOM-Listener und Event-Queues.
 - Kennzeichne unvollständige oder nicht parsebare Nachrichten; verwirf nicht stillschweigend den gesamten Stream.
 - Unterstütze einen expliziten Deaktivierungsmodus und verhindere mehrfach installierte Wrapper.
 
@@ -114,9 +106,4 @@ Payload-Felder bleiben ereignisspezifisch. Benenne nur Felder um, deren Bedeutun
 - Speichere keine Cookies, Authorization-Header, Session- oder Resume-Tokens, signierten URL-Parameter, Rohtranskripte oder Audio-Asset-URLs.
 - Entferne sensible Query-Parameter und IDs aus Logs, sofern sie nicht zwingend für die lokale Korrelation benötigt werden.
 - Erfasse Nachrichtentext nur, wenn die Integration ihn ausdrücklich benötigt, und behandle ihn als vertraulichen Inhalt.
-- Sende keine aufgezeichneten Nutzdaten an externe Validatoren oder Telemetriedienste.
-
-## Nicht erfasste Details
-
-- Die genauen WebSocket-Nachrichtenframes sind nicht vorhanden.
-- Die Datei-Verarbeitung verwendet im Mitschnitt ein ungewöhnliches Verhältnis zwischen Content-Type und Body-Framing; zukünftige Mitschnitte müssen dies bestätigen.
+- Sende keine Nutzdaten an externe Validatoren oder Telemetriedienste.

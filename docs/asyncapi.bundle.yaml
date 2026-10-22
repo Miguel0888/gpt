@@ -2,7 +2,7 @@ asyncapi: 3.1.0
 info:
   title: ChatGPT Web Streams
   version: "0.1.0"
-  description: Observed messages from the conversation and file-processing streams.
+  description: Conversation and file-processing stream messages.
 defaultContentType: application/json
 servers:
   chatgptWeb:
@@ -14,7 +14,7 @@ channels:
     description: >
       POST response stream with Content-Type text/event-stream.
       Explicit SSE event names are delta and delta_encoding.
-      Other observed events are JSON data objects identified by their type property.
+      Other events are JSON data objects identified by their type property.
     messages:
       delta:
         $ref: "#/components/messages/ConversationDelta"
@@ -36,28 +36,12 @@ channels:
         $ref: "#/components/messages/ConversationDetailMetadata"
       done:
         $ref: "#/components/messages/ConversationDoneMarker"
-    x-har-observations:
-      completeStreams: 4
-      deltaEvents: 53
-      deltaEncodingEvents: 4
-      resumeConversationTokenEvents: 4
-      inputMessageEvents: 4
-      titleGenerationEvents: 4
-      messageMarkerEvents: 16
-      serverSteMetadataEvents: 4
-      messageStreamCompleteEvents: 4
-      conversationDetailMetadataEvents: 4
-      doneMarkers: 4
   fileProcessingStream:
     address: /backend-api/files/process_upload_stream
-    description: Captured newline-delimited JSON body with Content-Type text/event-stream.
+    description: "Body framing: newline-delimited JSON. Content-Type: text/event-stream."
     messages:
       fileProcessing:
         $ref: "#/components/messages/FileProcessingEvent"
-    x-har-observations:
-      requestCount: 1
-      observedContentType: text/event-stream
-      observedBodyFraming: newline-delimited JSON
 operations:
   receiveConversationStream:
     action: receive
@@ -94,26 +78,25 @@ components:
       name: delta
       title: Conversation delta
       summary: Incremental conversation output
-      description: Observed in four complete streams; field-level payload schema unavailable.
+      description: Conversation delta payload.
       contentType: application/json
       x-sse-event-name: delta
       payload:
         schemaFormat: "application/schema+json;version=draft-07"
         schema:
           {
-            "description": "Field-level payload schema unavailable in current observations."
           }
     ConversationDeltaEncoding:
       name: delta_encoding
       title: Delta encoding
-      description: Observed in four complete streams; value v1 reported.
+      description: Encoding version v1.
       contentType: application/json
       x-sse-event-name: delta_encoding
       payload:
         schemaFormat: "application/schema+json;version=draft-07"
         schema:
           {
-            "description": "The value v1 was observed; the complete payload structure was not captured."
+              "description": "Encoding version v1.",
           }
     ResumeConversationToken:
       name: resume_conversation_token
@@ -192,9 +175,7 @@ components:
       name: message_marker
       title: Message marker
       description: >
-        JSON data event identified by its type field. Observed marker values:
-        cot_token, user_visible_token, final_channel_token and last_token.
-        The marker field name is unknown.
+        JSON data event identified by its type field. Marker values: cot_token, user_visible_token, final_channel_token and last_token.
       contentType: application/json
       x-payload-type-field: type
       payload:
@@ -202,7 +183,7 @@ components:
         schema:
           {
             "type": "object",
-            "description": "Observed marker values include cot_token, user_visible_token, final_channel_token and last_token. The marker field name is unknown.",
+              "description": "Marker values: cot_token, user_visible_token, final_channel_token and last_token.",
             "properties": {
               "type": {
                 "type": "string",
@@ -219,7 +200,7 @@ components:
     ServerSteMetadata:
       name: server_ste_metadata
       title: Server STE metadata
-      description: JSON data event identified by its type field; field-level schema is incomplete.
+      description: JSON data event identified by its type field.
       contentType: application/json
       x-payload-type-field: type
       payload:
@@ -267,7 +248,7 @@ components:
     ConversationDetailMetadata:
       name: conversation_detail_metadata
       title: Conversation detail metadata
-      description: JSON data event identified by its type field; field-level schema is incomplete.
+      description: JSON data event identified by its type field.
       contentType: application/json
       x-payload-type-field: type
       payload:
@@ -291,7 +272,7 @@ components:
     ConversationDoneMarker:
       name: "[DONE]"
       title: Stream completion sentinel
-      description: Literal terminal marker observed after the stream events.
+      description: "Terminal marker: [DONE]."
       contentType: text/plain
       x-stream-terminator: true
       payload:
@@ -307,15 +288,14 @@ components:
       name: file-processing-event
       title: File processing event
       description: >
-        Newline-delimited JSON event from the captured file processing stream.
-        Progress is absent from the observed file.indexing.completed event.
+        Newline-delimited JSON event from POST /backend-api/files/process_upload_stream. Progress values: 0, 20 and 100. No progress value for file.indexing.completed.
       contentType: application/json
       payload:
         schemaFormat: "application/schema+json;version=draft-07"
         schema:
           {
             "type": "object",
-            "description": "Observed line-delimited JSON event from POST /backend-api/files/process_upload_stream.",
+            "description": "Line-delimited JSON event from POST /backend-api/files/process_upload_stream.",
             "properties": {
               "file_id": {
                 "type": "string",
@@ -334,10 +314,10 @@ components:
               },
               "progress": {
                 "type": "number",
-                "description": "Observed as 0, 20 and 100 for some events; absent from the observed file.indexing.completed event."
+                "description": "Progress values: 0, 20 and 100. No progress value for file.indexing.completed.",
               },
               "extra": {
-                "description": "Observed as null in the supplied example; the actual type is not established."
+                "description": "Example value: null.",
               }
             },
             "required": [

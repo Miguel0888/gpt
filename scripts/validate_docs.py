@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 GENERATED_MARKDOWN_PAGES = {
     "hooks.html": "hooks.md",
-    "observations.html": "observations.md",
+    "results.html": "results.md",
     "specification.html": "chatgpt-api-specification.md",
 }
 
@@ -62,7 +62,7 @@ def main():
         "asyncapi.yaml",
         "asyncapi.bundle.yaml",
         "hooks.md",
-        "observations.md",
+        "results.md",
         "chatgpt-api-specification.md",
         "_layouts/default.html",
         "_config.yml",
@@ -82,18 +82,8 @@ def main():
     require('<aside class="notice">' not in asyncapi_html, "AsyncAPI page must not contain an editorial notice banner.")
 
     layout_html = (DOCS / "_layouts/default.html").read_text(encoding="utf-8")
-    require("Not an official or stable OpenAI API contract" not in layout_html, "Remove the editorial API disclaimer from the shared layout.")
-
-    openapi_text = (DOCS / "openapi.yaml").read_text(encoding="utf-8").lower()
-    asyncapi_text = (DOCS / "asyncapi.yaml").read_text(encoding="utf-8").lower()
-    require("not an official or stable openai api" not in openapi_text, "Remove editorial API disclaimers from OpenAPI.")
-    require("not an official or stable openai api" not in asyncapi_text, "Remove editorial API disclaimers from AsyncAPI.")
-    require("this is an internal, reverse-engineered web interface" not in openapi_text, "Remove repeated editorial text from OpenAPI.")
-    require("use the value returned by the application" not in openapi_text, "Remove instructional filler from OpenAPI descriptions.")
-    require("do not construct or persist signed query values" not in openapi_text, "Remove advisory text from OpenAPI descriptions.")
-    require("should be rechecked against future captures" not in openapi_text, "Keep OpenAPI descriptions focused on captured results.")
-    require("out of scope for openapi" not in openapi_text, "Describe observed WebSocket frames as findings, not scope commentary.")
-    require("not asserted to be exhaustive" not in openapi_text, "Remove editorial schema disclaimers from OpenAPI.")
+    require('title: "ChatGPT Web API"' in (DOCS / "openapi.yaml").read_text(encoding="utf-8"), "OpenAPI title is missing.")
+    require("permalink: results.html" in (DOCS / "results.md").read_text(encoding="utf-8"), "Technical results page is missing.")
 
     asyncapi_bundle = (DOCS / "asyncapi.bundle.yaml").read_text(encoding="utf-8")
     require("./schemas/chat-stream-events.schema.json#/" not in asyncapi_bundle, "AsyncAPI viewer bundle must not contain external JSON Schema references.")

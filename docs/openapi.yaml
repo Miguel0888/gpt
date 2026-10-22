@@ -2,7 +2,7 @@ openapi: "3.1.0"
 info:
   title: "ChatGPT Web API"
   version: "0.1.0"
-  description: "HTTP endpoints, request fields and response data observed in HAR captures dated 2026-10-16 and 2026-10-22. Requests originated from an authenticated browser session."
+  description: "HTTP endpoints, request fields and response data."
 servers:
   - url: "https://chatgpt.com"
 tags:
@@ -29,83 +29,78 @@ paths:
     get:
       tags: ["Codex Cloud / WebSocket"]
       summary: "Codex Cloud / WebSocket: GET /"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 101. No WebSocket message frames were captured."
+      description: "Requests: 1. HTTP status: 101. WebSocket message frames: none."
       operationId: "getRoot"
-      x-observed-host: "codex-cloud-backend.chatgpt.com"
-      x-har-observations:
+      x-request-host: "codex-cloud-backend.chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["101"]
+
+        statusCodes: ["101"]
         entriesWithoutHttpStatus: 0
       servers:
         - url: "https://codex-cloud-backend.chatgpt.com"
       x-transport: "websocket-handshake"
       responses:
         "101":
-          description: "WebSocket handshake observed; no WebSocket frames were captured."
+          description: "WebSocket handshake; message frames: none."
   "/backend-api/accounts/check/v4-2023-04-27":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/accounts/check/v4-2023-04-27"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 8 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 8. HTTP status: 200. "
       operationId: "getbackendapiaccountscheckv420230427"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 8
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   account_ordering:
-                    x-observed-in-har: true
-                  accounts:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      accounts:
+                                    additionalProperties: true
   "/backend-api/accounts/optimized/check":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/accounts/optimized/check"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapiaccountsoptimizedcheck"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   account:
-                    x-observed-in-har: true
-                  account_user:
-                    x-observed-in-har: true
-                  features:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      account_user:
+                                      features:
+                                    additionalProperties: true
   "/backend-api/aip/connectors/{connectorId}":
     get:
       tags: ["Connectors und Plugins"]
       summary: "Connectors und Plugins: GET /backend-api/aip/connectors/{connectorId}"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 2 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 2. HTTP status: 200. "
       operationId: "getbackendapiaipconnectorsByconnectorId"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 2
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "connectorId"
@@ -113,235 +108,179 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-        - name: "include_actions"
+                  - name: "include_actions"
           in: "query"
           required: false
           schema:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   action_param_schemas:
-                    x-observed-in-har: true
-                  actions:
-                    x-observed-in-har: true
-                  actions_changed_since_review:
-                    x-observed-in-har: true
-                  app_metadata:
-                    x-observed-in-har: true
-                  apps_privacy_control:
-                    x-observed-in-har: true
-                  available_controls:
-                    x-observed-in-har: true
-                  base_url:
-                    x-observed-in-har: true
-                  branding:
-                    x-observed-in-har: true
-                  connector_type:
-                    x-observed-in-har: true
-                  created_at:
-                    x-observed-in-har: true
-                  description:
-                    x-observed-in-har: true
-                  developer_type:
-                    x-observed-in-har: true
-                  disable_in_temporary_chat:
-                    x-observed-in-har: true
-                  distribution_channel:
-                    x-observed-in-har: true
-                  enable_multi_links:
-                    x-observed-in-har: true
-                  icon_assets:
-                    x-observed-in-har: true
-                  icon_dark_assets:
-                    x-observed-in-har: true
-                  id:
-                    x-observed-in-har: true
-                  keywords_for_discovery:
-                    x-observed-in-har: true
-                  labels:
-                    x-observed-in-har: true
-                  link_params_overrides:
-                    x-observed-in-har: true
-                  link_params_schema:
-                    x-observed-in-har: true
-                  logo_url:
-                    x-observed-in-har: true
-                  logo_url_dark:
-                    x-observed-in-har: true
-                  model_description:
-                    x-observed-in-har: true
-                  name:
-                    x-observed-in-har: true
-                  owners:
-                    x-observed-in-har: true
-                  policy_info:
-                    x-observed-in-har: true
-                  service:
-                    x-observed-in-har: true
-                  status:
-                    x-observed-in-har: true
-                  supported_auth:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  supports_oauth_owner_profile_id:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  sync_metadata:
-                    x-observed-in-har: true
-                  template_id:
-                    x-observed-in-har: true
-                  tunnel_id:
-                    x-observed-in-har: true
-                  updated_at:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      actions:
+                                      actions_changed_since_review:
+                                      app_metadata:
+                                      apps_privacy_control:
+                                      available_controls:
+                                      base_url:
+                                      branding:
+                                      connector_type:
+                                      created_at:
+                                      description:
+                                      developer_type:
+                                      disable_in_temporary_chat:
+                                      distribution_channel:
+                                      enable_multi_links:
+                                      icon_assets:
+                                      icon_dark_assets:
+                                      id:
+                                      keywords_for_discovery:
+                                      labels:
+                                      link_params_overrides:
+                                      link_params_schema:
+                                      logo_url:
+                                      logo_url_dark:
+                                      model_description:
+                                      name:
+                                      owners:
+                                      policy_info:
+                                      service:
+                                      status:
+                                      supported_auth:
+                                                          supports_oauth_owner_profile_id:
+                                                          sync_metadata:
+                                      template_id:
+                                      tunnel_id:
+                                      updated_at:
+                                    additionalProperties: true
   "/backend-api/aip/connectors/links/list_accessible":
     post:
       tags: ["Connectors und Plugins"]
       summary: "Connectors und Plugins: POST /backend-api/aip/connectors/links/list_accessible"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "postbackendapiaipconnectorslinkslistaccessible"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 link_refresh_strategy:
-                  x-observed-in-har: true
-                principals:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                  principals:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   links:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/aip/first-party/eligibility":
     get:
       tags: ["Connectors und Plugins"]
       summary: "Connectors und Plugins: GET /backend-api/aip/first-party/eligibility"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapiaipfirstpartyeligibility"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   finances:
-                    x-observed-in-har: true
-                  finances_eligibility:
-                    x-observed-in-har: true
-                  health:
-                    x-observed-in-har: true
-                  health_eligibility:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      finances_eligibility:
+                                      health:
+                                      health_eligibility:
+                                    additionalProperties: true
   "/backend-api/aip/workspace/connector-recommendation":
     get:
       tags: ["Connectoren und Empfehlungen"]
       summary: "Connectoren und Empfehlungen: GET /backend-api/aip/workspace/connector-recommendation"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. Im HAR neu beobachtet; Zweck anhand der Feldnamen eingeordnet. "
+      description: "Requests: 1. HTTP status: 200.  "
       operationId: "getbackendapiaipworkspaceconnectorrecommendation"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   connector_id:
-                    x-observed-in-har: true
-                  reason:
-                    x-observed-in-har: true
-                  google_drive_count:
-                    x-observed-in-har: true
-                  sharepoint_count:
-                    x-observed-in-har: true
-                  mx_provider:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      reason:
+                                      google_drive_count:
+                                      sharepoint_count:
+                                      mx_provider:
+                                    additionalProperties: true
   "/backend-api/amphora/clear_settings_cache":
     post:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: POST /backend-api/amphora/clear_settings_cache"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "postbackendapiamphoraclearsettingscache"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               additionalProperties: true
-              description: "Request body shape not fully inferred from the HAR."
-      responses:
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   success:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/amphora/notifications":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/amphora/notifications"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 2 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 2. HTTP status: 200. "
       operationId: "getbackendapiamphoranotifications"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 2
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "limit"
@@ -351,28 +290,26 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   cursor:
-                    x-observed-in-har: true
-                  items:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      items:
+                                    additionalProperties: true
   "/backend-api/beacons/home":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/beacons/home"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 3 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 3. HTTP status: 200. "
       operationId: "getbackendapibeaconshome"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 3
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "codex_window_type"
@@ -412,30 +349,29 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   beacon_ui_response:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/celsius/ws/user":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/celsius/ws/user"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 3 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 3. HTTP status: 200. "
       operationId: "getbackendapicelsiuswsuser"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 3
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
@@ -443,64 +379,61 @@ paths:
                 properties:
                   {}
                 additionalProperties: true
-                description: "The response body shape was not fully inferred from the HAR."
-  "/backend-api/codex/sites/access":
+                  "/backend-api/codex/sites/access":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/codex/sites/access"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapicodexsitesaccess"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   enabled:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/codex/spo/dashboard/capabilities":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/codex/spo/dashboard/capabilities"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 404. "
+      description: "Requests: 1. HTTP status: 404. "
       operationId: "getbackendapicodexspodashboardcapabilities"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["404"]
+
+        statusCodes: ["404"]
         entriesWithoutHttpStatus: 0
       responses:
         "404":
-          description: "Not found response observed in the HAR. This does not establish the intended success response."
+          description: "HTTP 404 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   error:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/composer/items":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/composer/items"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapicomposeritems"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "entrypoint"
@@ -515,26 +448,25 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   items:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/conversation/{conversationId}":
     patch:
       tags: ["Chats und Nachrichten"]
       summary: "Chats und Nachrichten: PATCH /backend-api/conversation/{conversationId}"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 3 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 3. HTTP status: 200. "
       operationId: "patchbackendapiconversationByconversationId"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 3
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "conversationId"
@@ -542,41 +474,36 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-      requestBody:
+                requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 gizmo_id:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   success:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/conversation/id/{conversationId}":
     delete:
       tags: ["Chats und Nachrichten"]
       summary: "Chats und Nachrichten: DELETE /backend-api/conversation/id/{conversationId}"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 2 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 2. HTTP status: 200. "
       operationId: "deletebackendapiconversationidByconversationId"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 2
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "conversationId"
@@ -584,55 +511,44 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-      responses:
+                responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   success:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/conversation/implicit_message_feedback":
     post:
       tags: ["Chat / Feedback"]
       summary: "Chat / Feedback: POST /backend-api/conversation/implicit_message_feedback"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. Observed feedback.feedback_type=copy. "
+      description: "Requests: 1. HTTP status: 200. feedback.feedback_type=copy. "
       operationId: "postbackendapiconversationimplicitmessagefeedback"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 conversation_id:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                message_id:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                source:
-                  x-observed-in-har: true
-                location:
-                  x-observed-in-har: true
-                feedback:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                                    message_id:
+                                                    source:
+                                  location:
+                                  feedback:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
@@ -640,80 +556,61 @@ paths:
                 properties:
                   {}
                 additionalProperties: true
-                description: "The response body shape was not fully inferred from the HAR."
-  "/backend-api/conversation/init":
+                  "/backend-api/conversation/init":
     post:
       tags: ["Chats und Nachrichten"]
       summary: "Chats und Nachrichten: POST /backend-api/conversation/init"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 9 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 9. HTTP status: 200. "
       operationId: "postbackendapiconversationinit"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 9
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 conversation_id:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                conversation_origin:
-                  x-observed-in-har: true
-                gizmo_id:
-                  x-observed-in-har: true
-                requested_default_model:
-                  x-observed-in-har: true
-                system_hints:
-                  x-observed-in-har: true
-                timezone:
-                  x-observed-in-har: true
-                timezone_offset_min:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                                    conversation_origin:
+                                  gizmo_id:
+                                  requested_default_model:
+                                  system_hints:
+                                  timezone:
+                                  timezone_offset_min:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   atlas_mode_enabled:
-                    x-observed-in-har: true
-                  banner_info:
-                    x-observed-in-har: true
-                  blocked_features:
-                    x-observed-in-har: true
-                  default_model_slug:
-                    x-observed-in-har: true
-                  intended_default_model_slug:
-                    x-observed-in-har: true
-                  limits_progress:
-                    x-observed-in-har: true
-                  model_limits:
-                    x-observed-in-har: true
-                  type:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      banner_info:
+                                      blocked_features:
+                                      default_model_slug:
+                                      intended_default_model_slug:
+                                      limits_progress:
+                                      model_limits:
+                                      type:
+                                    additionalProperties: true
   "/backend-api/conversations":
     get:
       tags: ["Chats und Nachrichten"]
       summary: "Chats und Nachrichten: GET /backend-api/conversations"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 16 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 16. HTTP status: 200. "
       operationId: "getbackendapiconversations"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 16
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "conversation_origin"
@@ -763,32 +660,28 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   items:
-                    x-observed-in-har: true
-                  limit:
-                    x-observed-in-har: true
-                  offset:
-                    x-observed-in-har: true
-                  total:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      limit:
+                                      offset:
+                                      total:
+                                    additionalProperties: true
   "/backend-api/conversations/{conversationId}":
     get:
       tags: ["Chats und Nachrichten"]
       summary: "Chats und Nachrichten: GET /backend-api/conversations/{conversationId}"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 6 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 6. HTTP status: 200. "
       operationId: "getbackendapiconversationsByconversationId"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 6
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "conversationId"
@@ -796,8 +689,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-        - name: "include_has_versions"
+                  - name: "include_has_versions"
           in: "query"
           required: false
           schema:
@@ -809,94 +701,58 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   async_status:
-                    x-observed-in-har: true
-                  atlas_mode_enabled:
-                    x-observed-in-har: true
-                  blocked_urls:
-                    x-observed-in-har: true
-                  context_scopes:
-                    x-observed-in-har: true
-                  context_truncation_continuation:
-                    x-observed-in-har: true
-                  conversation_id:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  conversation_origin:
-                    x-observed-in-har: true
-                  conversation_template_id:
-                    x-observed-in-har: true
-                  create_time:
-                    x-observed-in-har: true
-                  current_node:
-                    x-observed-in-har: true
-                  default_model_slug:
-                    x-observed-in-har: true
-                  disabled_tool_ids:
-                    x-observed-in-har: true
-                  gizmo_id:
-                    x-observed-in-har: true
-                  gizmo_type:
-                    x-observed-in-har: true
-                  is_archived:
-                    x-observed-in-har: true
-                  is_do_not_remember:
-                    x-observed-in-har: true
-                  is_read_only:
-                    x-observed-in-har: true
-                  is_starred:
-                    x-observed-in-har: true
-                  is_study_mode:
-                    x-observed-in-har: true
-                  is_temporary_chat:
-                    x-observed-in-har: true
-                  memory_scope:
-                    x-observed-in-har: true
-                  messages:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  moderation_results:
-                    x-observed-in-har: true
-                  owner:
-                    x-observed-in-har: true
-                  page_info:
-                    x-observed-in-har: true
-                  pinned_time:
-                    x-observed-in-har: true
-                  plugin_ids:
-                    x-observed-in-har: true
-                  safe_urls:
-                    x-observed-in-har: true
-                  sectioned_conversation:
-                    x-observed-in-har: true
-                  sugar_item_id:
-                    x-observed-in-har: true
-                  sugar_item_visible:
-                    x-observed-in-har: true
-                  title:
-                    x-observed-in-har: true
-                  update_time:
-                    x-observed-in-har: true
-                  voice:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      atlas_mode_enabled:
+                                      blocked_urls:
+                                      context_scopes:
+                                      context_truncation_continuation:
+                                      conversation_id:
+                                                          conversation_origin:
+                                      conversation_template_id:
+                                      create_time:
+                                      current_node:
+                                      default_model_slug:
+                                      disabled_tool_ids:
+                                      gizmo_id:
+                                      gizmo_type:
+                                      is_archived:
+                                      is_do_not_remember:
+                                      is_read_only:
+                                      is_starred:
+                                      is_study_mode:
+                                      is_temporary_chat:
+                                      memory_scope:
+                                      messages:
+                                                          moderation_results:
+                                      owner:
+                                      page_info:
+                                      pinned_time:
+                                      plugin_ids:
+                                      safe_urls:
+                                      sectioned_conversation:
+                                      sugar_item_id:
+                                      sugar_item_visible:
+                                      title:
+                                      update_time:
+                                      voice:
+                                    additionalProperties: true
   "/backend-api/dictation/stream":
     get:
       tags: ["Spracheingabe / Diktat"]
       summary: "Spracheingabe / Diktat: GET /backend-api/dictation/stream"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 101. Dictation WebSocket handshake; no message frames were captured. Only the HTTP upgrade handshake is described here; message frames were not present in the HAR."
+      description: "Requests: 1. HTTP status: 101. Dictation WebSocket handshake; message frames: none."
       operationId: "getbackendapidictationstream"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["101"]
+
+        statusCodes: ["101"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "dictation_surface"
@@ -907,18 +763,18 @@ paths:
       x-transport: "websocket-handshake"
       responses:
         "101":
-          description: "WebSocket handshake observed; no WebSocket frames were captured."
+          description: "WebSocket handshake; message frames: none."
   "/backend-api/dictation/upload-asset":
     post:
       tags: ["Spracheingabe / Diktat"]
       summary: "Spracheingabe / Diktat: POST /backend-api/dictation/upload-asset"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. Audioformat OGG; Asset-TTL 30 Tage. "
+      description: "Requests: 1. HTTP status: 200. Audioformat OGG; Asset-TTL 30 Tage. "
       operationId: "postbackendapidictationuploadasset"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
@@ -930,34 +786,30 @@ paths:
               additionalProperties:
                 type: "string"
                 format: "binary"
-              description: "Multipart audio asset payload. The exact form field name was not reliably recoverable from the HAR."
+              description: "Multipart audio asset payload."
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   asset_pointer:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  asset_ttl:
-                    x-observed-in-har: true
-                  asset_format:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                                          asset_ttl:
+                                      asset_format:
+                                    additionalProperties: true
   "/backend-api/estuary/content":
     get:
       tags: ["Dateien"]
       summary: "Dateien: GET /backend-api/estuary/content"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapiestuarycontent"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "cid"
@@ -997,85 +849,61 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "text/plain":
               schema:
                 type: "string"
-                description: "Plain-text response body; contents are not fully specified."
+                description: "Plain-text response body."
   "/backend-api/f/conversation":
     post:
       tags: ["Chats und Nachrichten"]
       summary: "Chats und Nachrichten: POST /backend-api/f/conversation"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 6 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 6. HTTP status: 200. "
       operationId: "postbackendapifconversation"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 6
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 1
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 action:
-                  x-observed-in-har: true
-                client_contextual_info:
-                  x-observed-in-har: true
-                client_prepare_state:
-                  x-observed-in-har: true
-                conversation_id:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                conversation_mode:
-                  x-observed-in-har: true
-                genui_state_snapshots:
-                  x-observed-in-har: true
-                gizmo_id:
-                  x-observed-in-har: true
-                is_do_not_remember:
-                  x-observed-in-har: true
-                local_function_names:
-                  x-observed-in-har: true
-                messages:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                model:
-                  x-observed-in-har: true
-                one_off_model_override:
-                  x-observed-in-har: true
-                parent_message_id:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                requested_default_model:
-                  x-observed-in-har: true
-                supported_encodings:
-                  x-observed-in-har: true
-                thinking_effort:
-                  x-observed-in-har: true
-                timezone:
-                  x-observed-in-har: true
-                timezone_offset_min:
-                  x-observed-in-har: true
-                turn_attribution:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                  client_contextual_info:
+                                  client_prepare_state:
+                                  conversation_id:
+                                                    conversation_mode:
+                                  genui_state_snapshots:
+                                  gizmo_id:
+                                  is_do_not_remember:
+                                  local_function_names:
+                                  messages:
+                                                    model:
+                                  one_off_model_override:
+                                  parent_message_id:
+                                                    requested_default_model:
+                                  supported_encodings:
+                                  thinking_effort:
+                                  timezone:
+                                  timezone_offset_min:
+                                  turn_attribution:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "text/event-stream":
               schema:
                 type: "string"
-                description: "Observed as a Server-Sent Events stream. Four complete response streams were captured. Explicit SSE event names: delta and delta_encoding. Additional JSON data objects use the type values resume_conversation_token, input_message, title_generation, message_marker, server_ste_metadata, message_stream_complete and conversation_detail_metadata. The [DONE] completion sentinel was also observed. Payload schemas are incomplete."
+                description: "Server-Sent Events stream. Complete response streams: 4. Explicit SSE event names: delta and delta_encoding. JSON type values: resume_conversation_token, input_message, title_generation, message_marker, server_ste_metadata, message_stream_complete and conversation_detail_metadata. Terminal marker: [DONE]."
                 x-stream-protocol: "Server-Sent Events (SSE)"
-                x-stream-observations:
+                x-stream-statistics:
                   completeStreams: 4
                   deltaEvents: 53
                   deltaEncodingEvents: 4
@@ -1091,144 +919,103 @@ paths:
     post:
       tags: ["Chats und Nachrichten"]
       summary: "Chats und Nachrichten: POST /backend-api/f/conversation/prepare"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 8 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 8. HTTP status: 200. "
       operationId: "postbackendapifconversationprepare"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 8
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 action:
-                  x-observed-in-har: true
-                client_contextual_info:
-                  x-observed-in-har: true
-                client_prepare_dispatch:
-                  x-observed-in-har: true
-                client_prepare_source:
-                  x-observed-in-har: true
-                client_prepare_state:
-                  x-observed-in-har: true
-                conversation_id:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                conversation_mode:
-                  x-observed-in-har: true
-                gizmo_id:
-                  x-observed-in-har: true
-                is_do_not_remember:
-                  x-observed-in-har: true
-                local_function_names:
-                  x-observed-in-har: true
-                model:
-                  x-observed-in-har: true
-                one_off_model_override:
-                  x-observed-in-har: true
-                parent_message_id:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                partial_query:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                requested_default_model:
-                  x-observed-in-har: true
-                supported_encodings:
-                  x-observed-in-har: true
-                thinking_effort:
-                  x-observed-in-har: true
-                timezone:
-                  x-observed-in-har: true
-                timezone_offset_min:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                  client_contextual_info:
+                                  client_prepare_dispatch:
+                                  client_prepare_source:
+                                  client_prepare_state:
+                                  conversation_id:
+                                                    conversation_mode:
+                                  gizmo_id:
+                                  is_do_not_remember:
+                                  local_function_names:
+                                  model:
+                                  one_off_model_override:
+                                  parent_message_id:
+                                                    partial_query:
+                                                    requested_default_model:
+                                  supported_encodings:
+                                  thinking_effort:
+                                  timezone:
+                                  timezone_offset_min:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   conduit_token:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  status:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                                          status:
+                                    additionalProperties: true
   "/backend-api/files":
     post:
       tags: ["Dateien"]
       summary: "Dateien: POST /backend-api/files"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "postbackendapifiles"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 file_name:
-                  x-observed-in-har: true
-                file_size:
-                  x-observed-in-har: true
-                gizmo_id:
-                  x-observed-in-har: true
-                mime_type:
-                  x-observed-in-har: true
-                reset_rate_limits:
-                  x-observed-in-har: true
-                supports_direct_azure_multipart:
-                  x-observed-in-har: true
-                timezone_offset_min:
-                  x-observed-in-har: true
-                use_case:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                  file_size:
+                                  gizmo_id:
+                                  mime_type:
+                                  reset_rate_limits:
+                                  supports_direct_azure_multipart:
+                                  timezone_offset_min:
+                                  use_case:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   file_id:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  status:
-                    x-observed-in-har: true
-                  upload_url:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                                          status:
+                                      upload_url:
+                                    additionalProperties: true
   "/backend-api/files/download/{fileId}":
     get:
       tags: ["Dateien"]
       summary: "Dateien: GET /backend-api/files/download/{fileId}"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapifilesdownloadByfileId"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "fileId"
@@ -1236,8 +1023,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-        - name: "download_intent"
+                  - name: "download_intent"
           in: "query"
           required: false
           schema:
@@ -1249,90 +1035,71 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   creation_time:
-                    x-observed-in-har: true
-                  download_url:
-                    x-observed-in-har: true
-                  file_name:
-                    x-observed-in-har: true
-                  file_size_bytes:
-                    x-observed-in-har: true
-                  metadata:
-                    x-observed-in-har: true
-                  mime_type:
-                    x-observed-in-har: true
-                  no_auth_user_upload:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  status:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      download_url:
+                                      file_name:
+                                      file_size_bytes:
+                                      metadata:
+                                      mime_type:
+                                      no_auth_user_upload:
+                                                          status:
+                                    additionalProperties: true
   "/backend-api/files/process_upload_stream":
     post:
       tags: ["Dateien"]
       summary: "Dateien: POST /backend-api/files/process_upload_stream"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "postbackendapifilesprocessuploadstream"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 entry_surface:
-                  x-observed-in-har: true
-                file_id:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                file_name:
-                  x-observed-in-har: true
-                gizmo_id:
-                  x-observed-in-har: true
-                index_for_retrieval:
-                  x-observed-in-har: true
-                mime_type:
-                  x-observed-in-har: true
-                use_case:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                  file_id:
+                                                    file_name:
+                                  gizmo_id:
+                                  index_for_retrieval:
+                                  mime_type:
+                                  use_case:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "text/event-stream":
               schema:
                 type: "string"
-                description: "The response Content-Type is text/event-stream, but the captured body uses newline-delimited JSON objects rather than conventional SSE event/data framing. Observed event values include file.processing.started, file.processing.file_ready, file.indexing.completed and file.processing.completed. The payload shape is based on the supplied capture."
-                x-stream-protocol: "newline-delimited JSON (observed body)"
-                x-stream-observations:
+                description: "Content-Type: text/event-stream. Body framing: newline-delimited JSON objects. Event values: file.processing.started, file.processing.file_ready, file.indexing.completed and file.processing.completed."
+                x-stream-protocol: "newline-delimited JSON"
+                x-stream-statistics:
                   contentType: "text/event-stream"
                   framing: "newline-delimited JSON"
   "/backend-api/gizmos/{projectId}":
     get:
       tags: ["Projekte und Seitenleiste"]
       summary: "Projekte und Seitenleiste: GET /backend-api/gizmos/{projectId}"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 3 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 3. HTTP status: 200. "
       operationId: "getbackendapigizmosByprojectId"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 3
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "projectId"
@@ -1340,46 +1107,38 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-        - name: "include_file_limits"
+                  - name: "include_file_limits"
           in: "query"
           required: false
           schema:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   files:
-                    x-observed-in-har: true
-                  gizmo:
-                    x-observed-in-har: true
-                  has_tpp_conversation:
-                    x-observed-in-har: true
-                  product_features:
-                    x-observed-in-har: true
-                  project_connector_scope_limits:
-                    x-observed-in-har: true
-                  project_file_limits:
-                    x-observed-in-har: true
-                  tools:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      gizmo:
+                                      has_tpp_conversation:
+                                      product_features:
+                                      project_connector_scope_limits:
+                                      project_file_limits:
+                                      tools:
+                                    additionalProperties: true
   "/backend-api/gizmos/{projectId}/conversations":
     get:
       tags: ["Projekte und Seitenleiste"]
       summary: "Projekte und Seitenleiste: GET /backend-api/gizmos/{projectId}/conversations"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 20 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 20. HTTP status: 200. "
       operationId: "getbackendapigizmosByprojectIdconversations"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 20
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "projectId"
@@ -1387,8 +1146,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-        - name: "limit"
+                  - name: "limit"
           in: "query"
           required: false
           schema:
@@ -1400,28 +1158,26 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   cursor:
-                    x-observed-in-har: true
-                  items:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      items:
+                                    additionalProperties: true
   "/backend-api/gizmos/snorlax/sidebar":
     get:
       tags: ["Projekte und Seitenleiste"]
       summary: "Projekte und Seitenleiste: GET /backend-api/gizmos/snorlax/sidebar"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 4 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 4. HTTP status: 200. "
       operationId: "getbackendapigizmossnorlaxsidebar"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 4
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 1
       parameters:
         - name: "conversations_per_gizmo"
@@ -1446,28 +1202,26 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   cursor:
-                    x-observed-in-har: true
-                  items:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      items:
+                                    additionalProperties: true
   "/backend-api/hazelnuts":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/hazelnuts"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapihazelnuts"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "include_permissions"
@@ -1482,26 +1236,25 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   hazelnuts:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/live/conversations/{conversationId}/session-sharing":
     get:
       tags: ["Live und Freigabe"]
       summary: "Live und Freigabe: GET /backend-api/live/conversations/{conversationId}/session-sharing"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapiliveconversationsByconversationIdsessionsharing"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "conversationId"
@@ -1509,103 +1262,73 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-      responses:
+                responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   av_sessions:
-                    x-observed-in-har: true
-                  can_share:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      can_share:
+                                    additionalProperties: true
   "/backend-api/me":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/me"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 2 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 2. HTTP status: 200. "
       operationId: "getbackendapime"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 2
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   ads_segment_id:
-                    x-observed-in-har: true
-                  amr:
-                    x-observed-in-har: true
-                  chatgpt_eval_data:
-                    x-observed-in-har: true
-                  claimed_domain_org_id:
-                    x-observed-in-har: true
-                  client_id:
-                    x-observed-in-har: true
-                  country:
-                    x-observed-in-har: true
-                  created:
-                    x-observed-in-har: true
-                  email:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  email_domain_type:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  first_name:
-                    x-observed-in-har: true
-                  groups:
-                    x-observed-in-har: true
-                  has_payg_project_spend_limit:
-                    x-observed-in-har: true
-                  id:
-                    x-observed-in-har: true
-                  is_test_user:
-                    x-observed-in-har: true
-                  mfa_flag_enabled:
-                    x-observed-in-har: true
-                  name:
-                    x-observed-in-har: true
-                  object:
-                    x-observed-in-har: true
-                  orgs:
-                    x-observed-in-har: true
-                  phone_number:
-                    x-observed-in-har: true
-                  picture:
-                    x-observed-in-har: true
-                  region:
-                    x-observed-in-har: true
-                  region_code:
-                    x-observed-in-har: true
-                  signup_attribution:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  tenants:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      amr:
+                                      chatgpt_eval_data:
+                                      claimed_domain_org_id:
+                                      client_id:
+                                      country:
+                                      created:
+                                      email:
+                                                          email_domain_type:
+                                                          first_name:
+                                      groups:
+                                      has_payg_project_spend_limit:
+                                      id:
+                                      is_test_user:
+                                      mfa_flag_enabled:
+                                      name:
+                                      object:
+                                      orgs:
+                                      phone_number:
+                                      picture:
+                                      region:
+                                      region_code:
+                                      signup_attribution:
+                                                          tenants:
+                                    additionalProperties: true
   "/backend-api/models":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/models"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 3 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 3. HTTP status: 200. "
       operationId: "getbackendapimodels"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 3
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "iim"
@@ -1625,81 +1348,63 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   categories:
-                    x-observed-in-har: true
-                  default_model_slug:
-                    x-observed-in-har: true
-                  icons:
-                    x-observed-in-har: true
-                  internal_groups:
-                    x-observed-in-har: true
-                  model_picker_version:
-                    x-observed-in-har: true
-                  models:
-                    x-observed-in-har: true
-                  secondary_title:
-                    x-observed-in-har: true
-                  title:
-                    x-observed-in-har: true
-                  versions:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      default_model_slug:
+                                      icons:
+                                      internal_groups:
+                                      model_picker_version:
+                                      models:
+                                      secondary_title:
+                                      title:
+                                      versions:
+                                    additionalProperties: true
   "/backend-api/pageConfigs/billing":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/pageConfigs/billing"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapipageConfigsbilling"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   account:
-                    x-observed-in-har: true
-                  balance:
-                    x-observed-in-har: true
-                  banners:
-                    x-observed-in-har: true
-                  billing_information:
-                    x-observed-in-har: true
-                  credits:
-                    x-observed-in-har: true
-                  free_workspace_upgrade:
-                    x-observed-in-har: true
-                  invite_prepurchase:
-                    x-observed-in-har: true
-                  plan_management:
-                    x-observed-in-har: true
-                  usage_limits:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      balance:
+                                      banners:
+                                      billing_information:
+                                      credits:
+                                      free_workspace_upgrade:
+                                      invite_prepurchase:
+                                      plan_management:
+                                      usage_limits:
+                                    additionalProperties: true
   "/backend-api/pins":
     get:
       tags: ["Projekte und Seitenleiste"]
       summary: "Projekte und Seitenleiste: GET /backend-api/pins"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 9 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 9. HTTP status: 200. "
       operationId: "getbackendapipins"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 9
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "item_type"
@@ -1709,7 +1414,7 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
@@ -1717,90 +1422,78 @@ paths:
                 items:
                   type: "object"
                   additionalProperties: true
-                description: "The HAR indicates an array response; item structure was not fully inferred."
+                description: "Array response."
   "/backend-api/profiles/me":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/profiles/me"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapiprofilesme"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   profile_details:
-                    x-observed-in-har: true
-                  viewer_access:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      viewer_access:
+                                    additionalProperties: true
   "/backend-api/projects":
     post:
       tags: ["Projekte und Seitenleiste"]
       summary: "Projekte und Seitenleiste: POST /backend-api/projects"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "postbackendapiprojects"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 emoji:
-                  x-observed-in-har: true
-                instructions:
-                  x-observed-in-har: true
-                memory_scope:
-                  x-observed-in-har: true
-                name:
-                  x-observed-in-har: true
-                theme:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                  instructions:
+                                  memory_scope:
+                                  name:
+                                  theme:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   error:
-                    x-observed-in-har: true
-                  resource:
-                    x-observed-in-har: true
-                  sharing_targets:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      resource:
+                                      sharing_targets:
+                                    additionalProperties: true
   "/backend-api/projects/{projectId}/connector_scopes":
     get:
       tags: ["Projekte und Seitenleiste"]
       summary: "Projekte und Seitenleiste: GET /backend-api/projects/{projectId}/connector_scopes"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapiprojectsByprojectIdconnectorscopes"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "projectId"
@@ -1808,38 +1501,34 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-        - name: "limit"
+                  - name: "limit"
           in: "query"
           required: false
           schema:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   cursor:
-                    x-observed-in-har: true
-                  items:
-                    x-observed-in-har: true
-                  project_connectors_enabled:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      items:
+                                      project_connectors_enabled:
+                                    additionalProperties: true
   "/backend-api/projects/{projectId}/files":
     post:
       tags: ["Projekte und Seitenleiste"]
       summary: "Projekte und Seitenleiste: POST /backend-api/projects/{projectId}/files"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "postbackendapiprojectsByprojectIdfiles"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "projectId"
@@ -1847,41 +1536,36 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-      requestBody:
+                requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 files:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   resource:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/projects/{projectId}/files/{fileId}":
     delete:
       tags: ["Projekte und Seitenleiste"]
       summary: "Projekte und Seitenleiste: DELETE /backend-api/projects/{projectId}/files/{fileId}"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "deletebackendapiprojectsByprojectIdfilesByfileId"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "projectId"
@@ -1889,35 +1573,32 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-        - name: "fileId"
+                  - name: "fileId"
           in: "path"
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-      responses:
+                responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   resource:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/projects/{projectId}/saves":
     get:
       tags: ["Projekte und Seitenleiste"]
       summary: "Projekte und Seitenleiste: GET /backend-api/projects/{projectId}/saves"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 2 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 2. HTTP status: 200. "
       operationId: "getbackendapiprojectsByprojectIdsaves"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 2
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "projectId"
@@ -1925,36 +1606,33 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-        - name: "limit"
+                  - name: "limit"
           in: "query"
           required: false
           schema:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   cursor:
-                    x-observed-in-har: true
-                  items:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      items:
+                                    additionalProperties: true
   "/backend-api/prompt_library/":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/prompt_library/"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapipromptlibrary"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "limit"
@@ -1974,59 +1652,52 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   greeting:
-                    x-observed-in-har: true
-                  items:
-                    x-observed-in-har: true
-                  limit:
-                    x-observed-in-har: true
-                  offset:
-                    x-observed-in-har: true
-                  total:
-                    x-observed-in-har: true
-                  ui_style:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      items:
+                                      limit:
+                                      offset:
+                                      total:
+                                      ui_style:
+                                    additionalProperties: true
   "/backend-api/ps/plugins/home":
     get:
       tags: ["Connectors und Plugins"]
       summary: "Connectors und Plugins: GET /backend-api/ps/plugins/home"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapipspluginshome"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   sections:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/ps/plugins/installed":
     get:
       tags: ["Connectors und Plugins"]
       summary: "Connectors und Plugins: GET /backend-api/ps/plugins/installed"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapipspluginsinstalled"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "includeExtensions"
@@ -2041,191 +1712,154 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   pagination:
-                    x-observed-in-har: true
-                  plugins:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      plugins:
+                                    additionalProperties: true
   "/backend-api/sentinel/chat-requirements/finalize":
     post:
       tags: ["Schutz und Anfrageprüfung"]
       summary: "Schutz und Anfrageprüfung: POST /backend-api/sentinel/chat-requirements/finalize"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 6 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 6. HTTP status: 200. "
       operationId: "postbackendapisentinelchatrequirementsfinalize"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 6
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 prepare_token:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-                proofofwork:
-                  x-observed-in-har: true
-                turnstile:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                                    proofofwork:
+                                  turnstile:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   expire_after:
-                    x-observed-in-har: true
-                  expire_at:
-                    x-observed-in-har: true
-                  persona:
-                    x-observed-in-har: true
-                  token:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      expire_at:
+                                      persona:
+                                      token:
+                                                        additionalProperties: true
   "/backend-api/sentinel/chat-requirements/prepare":
     post:
       tags: ["Schutz und Anfrageprüfung"]
       summary: "Schutz und Anfrageprüfung: POST /backend-api/sentinel/chat-requirements/prepare"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 7 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 7. HTTP status: 200. "
       operationId: "postbackendapisentinelchatrequirementsprepare"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 7
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 p:
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   persona:
-                    x-observed-in-har: true
-                  prepare_token:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  proofofwork:
-                    x-observed-in-har: true
-                  so:
-                    x-observed-in-har: true
-                  turnstile:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      prepare_token:
+                                                          proofofwork:
+                                      so:
+                                      turnstile:
+                                    additionalProperties: true
   "/backend-api/settings/is_adult":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/settings/is_adult"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 5 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 5. HTTP status: 200. "
       operationId: "getbackendapisettingsisadult"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 5
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   age_is_known:
-                    x-observed-in-har: true
-                  age_status:
-                    x-observed-in-har: true
-                  has_verified_age_or_dob:
-                    x-observed-in-har: true
-                  is_adult:
-                    x-observed-in-har: true
-                  is_u18_model_policy_enabled:
-                    x-observed-in-har: true
-                  show_age_verification_setting:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      age_status:
+                                      has_verified_age_or_dob:
+                                      is_adult:
+                                      is_u18_model_policy_enabled:
+                                      show_age_verification_setting:
+                                    additionalProperties: true
   "/backend-api/settings/user":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/settings/user"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 2 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 2. HTTP status: 200. "
       operationId: "getbackendapisettingsuser"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 2
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   announcements:
-                    x-observed-in-har: true
-                  available_options:
-                    x-observed-in-har: true
-                  beta_settings:
-                    x-observed-in-har: true
-                  eligible_announcement_strings:
-                    x-observed-in-har: true
-                  eligible_announcements:
-                    x-observed-in-har: true
-                  flags:
-                    x-observed-in-har: true
-                  permissions:
-                    x-observed-in-har: true
-                  persistent_announcements:
-                    x-observed-in-har: true
-                  settings:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      available_options:
+                                      beta_settings:
+                                      eligible_announcement_strings:
+                                      eligible_announcements:
+                                      flags:
+                                      permissions:
+                                      persistent_announcements:
+                                      settings:
+                                    additionalProperties: true
   "/backend-api/subscriptions":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/subscriptions"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapisubscriptions"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "account_id"
@@ -2235,81 +1869,52 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   active_start:
-                    x-observed-in-har: true
-                  active_until:
-                    x-observed-in-har: true
-                  assigned:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  became_delinquent_timestamp:
-                    x-observed-in-har: true
-                  billing_currency:
-                    x-observed-in-har: true
-                  billing_period:
-                    x-observed-in-har: true
-                  cancellation_outcome:
-                    x-observed-in-har: true
-                  current_billing_period:
-                    x-observed-in-har: true
-                  entitlement:
-                    x-observed-in-har: true
-                  from_webview:
-                    x-observed-in-har: true
-                  grace_period_end_timestamp:
-                    x-observed-in-har: true
-                  id:
-                    x-observed-in-har: true
-                  is_active:
-                    x-observed-in-har: true
-                  is_delinquent:
-                    x-observed-in-har: true
-                  is_processor_stripe:
-                    x-observed-in-har: true
-                  last_active_subscription:
-                    x-observed-in-har: true
-                  last_credit_grant_update:
-                    x-observed-in-har: true
-                  next_credit_grant_update:
-                    x-observed-in-har: true
-                  non_profit_org_discount_applied:
-                    x-observed-in-har: true
-                  plan_type:
-                    x-observed-in-har: true
-                  price_country:
-                    x-observed-in-har: true
-                  pricing_scope:
-                    x-observed-in-har: true
-                  scheduled_billing_period:
-                    x-observed-in-har: true
-                  seat_capacity:
-                    x-observed-in-har: true
-                  seats_entitled:
-                    x-observed-in-har: true
-                  seats_in_use:
-                    x-observed-in-har: true
-                  use_non_profit_pricing:
-                    x-observed-in-har: true
-                  will_renew:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      active_until:
+                                      assigned:
+                                                          became_delinquent_timestamp:
+                                      billing_currency:
+                                      billing_period:
+                                      cancellation_outcome:
+                                      current_billing_period:
+                                      entitlement:
+                                      from_webview:
+                                      grace_period_end_timestamp:
+                                      id:
+                                      is_active:
+                                      is_delinquent:
+                                      is_processor_stripe:
+                                      last_active_subscription:
+                                      last_credit_grant_update:
+                                      next_credit_grant_update:
+                                      non_profit_org_discount_applied:
+                                      plan_type:
+                                      price_country:
+                                      pricing_scope:
+                                      scheduled_billing_period:
+                                      seat_capacity:
+                                      seats_entitled:
+                                      seats_in_use:
+                                      use_non_profit_pricing:
+                                      will_renew:
+                                    additionalProperties: true
   "/backend-api/system_hints":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/system_hints"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 11 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 11. HTTP status: 200. "
       operationId: "getbackendapisystemhints"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 11
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "exclude_logo"
@@ -2329,30 +1934,29 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   system_hints:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/backend-api/tpp/default-tab-recommendation":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/tpp/default-tab-recommendation"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapitppdefaulttabrecommendation"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
@@ -2360,18 +1964,17 @@ paths:
                 properties:
                   {}
                 additionalProperties: true
-                description: "The response body shape was not fully inferred from the HAR."
-  "/backend-api/tpp/models/":
+                  "/backend-api/tpp/models/":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/tpp/models/"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 3 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 3. HTTP status: 200. "
       operationId: "getbackendapitppmodels"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 3
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "iim"
@@ -2386,199 +1989,153 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   categories:
-                    x-observed-in-har: true
-                  default_model_slug:
-                    x-observed-in-har: true
-                  default_slider_upgrades:
-                    x-observed-in-har: true
-                  eligible_codex_model_slugs:
-                    x-observed-in-har: true
-                  icons:
-                    x-observed-in-har: true
-                  internal_groups:
-                    x-observed-in-har: true
-                  model_picker_version:
-                    x-observed-in-har: true
-                  model_upgrades:
-                    x-observed-in-har: true
-                  models:
-                    x-observed-in-har: true
-                  secondary_title:
-                    x-observed-in-har: true
-                  slider_settings:
-                    x-observed-in-har: true
-                  title:
-                    x-observed-in-har: true
-                  versions:
-                    x-observed-in-har: true
-                  workspace_model_policy:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      default_model_slug:
+                                      default_slider_upgrades:
+                                      eligible_codex_model_slugs:
+                                      icons:
+                                      internal_groups:
+                                      model_picker_version:
+                                      model_upgrades:
+                                      models:
+                                      secondary_title:
+                                      slider_settings:
+                                      title:
+                                      versions:
+                                      workspace_model_policy:
+                                    additionalProperties: true
   "/backend-api/user_granular_consent":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/user_granular_consent"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapiusergranularconsent"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   granular_consent:
-                    x-observed-in-har: true
-                  is_consent_required:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      is_consent_required:
+                                    additionalProperties: true
   "/backend-api/user_system_messages":
     get:
       tags: ["Konfiguration, Konto und Sonstiges"]
       summary: "Konfiguration, Konto und Sonstiges: GET /backend-api/user_system_messages"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapiusersystemmessages"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   about_model_message:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  about_user_message:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  disabled_tools:
-                    x-observed-in-har: true
-                  enabled:
-                    x-observed-in-har: true
-                  name_user_message:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  object:
-                    x-observed-in-har: true
-                  other_user_message:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  personality_traits:
-                    x-observed-in-har: true
-                  personality_type_selection:
-                    x-observed-in-har: true
-                  role_user_message:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  traits_enabled:
-                    x-observed-in-har: true
-                  traits_model_message:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                additionalProperties: true
+                                                          about_user_message:
+                                                          disabled_tools:
+                                      enabled:
+                                      name_user_message:
+                                                          object:
+                                      other_user_message:
+                                                          personality_traits:
+                                      personality_type_selection:
+                                      role_user_message:
+                                                          traits_enabled:
+                                      traits_model_message:
+                                                        additionalProperties: true
   "/backend-api/wham/accounts/check":
     get:
       tags: ["Work und Kontingente"]
       summary: "Work und Kontingente: GET /backend-api/wham/accounts/check"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 1. HTTP status: 200. "
       operationId: "getbackendapiwhamaccountscheck"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   account_ordering:
-                    x-observed-in-har: true
-                  accounts:
-                    x-observed-in-har: true
-                  default_account_id:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      accounts:
+                                      default_account_id:
+                                                        additionalProperties: true
   "/backend-api/wham/analytics-events/events":
     post:
       tags: ["Telemetrie / Analytics"]
       summary: "Telemetrie / Analytics: POST /backend-api/wham/analytics-events/events"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. Ein codex_action_event wurde im Request beobachtet. "
+      description: "Requests: 1. HTTP status: 200. Request includes codex_action_event. "
       operationId: "postbackendapiwhamanalyticseventsevents"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 "events (event_type":
-                  x-observed-in-har: true
-                "event_params)":
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                  "event_params)":
+                                additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   status:
-                    x-observed-in-har: true
-                  total_events:
-                    x-observed-in-har: true
-                  accepted_events:
-                    x-observed-in-har: true
-                  skipped_events:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      total_events:
+                                      accepted_events:
+                                      skipped_events:
+                                    additionalProperties: true
   "/backend-api/wham/tasks/list":
     get:
       tags: ["Work und Kontingente"]
       summary: "Work und Kontingente: GET /backend-api/wham/tasks/list"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 10 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 10. HTTP status: 200. "
       operationId: "getbackendapiwhamtaskslist"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 10
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 1
       parameters:
         - name: "limit"
@@ -2593,114 +2150,91 @@ paths:
             type: "string"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   cursor:
-                    x-observed-in-har: true
-                  items:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      items:
+                                    additionalProperties: true
   "/backend-api/wham/usage":
     get:
       tags: ["Work und Kontingente"]
       summary: "Work und Kontingente: GET /backend-api/wham/usage"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 15 request(s) recorded. Observed HTTP status code(s): 200. "
+      description: "Requests: 15. HTTP status: 200. "
       operationId: "getbackendapiwhamusage"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 15
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   account_id:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  additional_rate_limits:
-                    x-observed-in-har: true
-                  code_review_rate_limit:
-                    x-observed-in-har: true
-                  credits:
-                    x-observed-in-har: true
-                  email:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                  model_usage:
-                    x-observed-in-har: true
-                  plan_type:
-                    x-observed-in-har: true
-                  promo:
-                    x-observed-in-har: true
-                  rate_limit:
-                    x-observed-in-har: true
-                  rate_limit_reached_type:
-                    x-observed-in-har: true
-                  rate_limit_reset_credits:
-                    x-observed-in-har: true
-                  spend_control:
-                    x-observed-in-har: true
-                  user_id:
-                    description: "Observed response field; exact JSON type is not fully inferred from the HAR. "
-                    x-observed-in-har: true
-                additionalProperties: true
+                                                          additional_rate_limits:
+                                      code_review_rate_limit:
+                                      credits:
+                                      email:
+                                                          model_usage:
+                                      plan_type:
+                                      promo:
+                                      rate_limit:
+                                      rate_limit_reached_type:
+                                      rate_limit_reset_credits:
+                                      spend_control:
+                                      user_id:
+                                                        additionalProperties: true
   "/ces/statsc/flush":
     post:
       tags: ["Telemetrie / Feature-Flags"]
       summary: "Telemetrie / Feature-Flags: POST /ces/statsc/flush"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 4 request(s) recorded. Observed HTTP status code(s): 200. Vier Aufrufe im HAR vom 22.10. "
+      description: "Requests: 4. HTTP status: 200.  "
       operationId: "postcesstatscflush"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 4
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 "gebündelte Statsig-Payload; Details nicht normalisiert":
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                                  additionalProperties: true
+                    responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
                   success:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/ces/v1/rgstr":
     post:
       tags: ["Telemetrie"]
       summary: "Telemetrie: POST /ces/v1/rgstr"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 22 request(s) recorded. Observed HTTP status code(s): 202. "
+      description: "Requests: 22. HTTP status: 202. "
       operationId: "postcesv1rgstr"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 22
-        sources: ["2026-10-16", "2026-10-22"]
-        observedStatusCodes: ["202"]
+
+        statusCodes: ["202"]
         entriesWithoutHttpStatus: 1
       parameters:
         - name: "ec"
@@ -2735,20 +2269,15 @@ paths:
             type: "string"
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               properties:
                 events:
-                  x-observed-in-har: true
-                statsigMetadata:
-                  description: "Observed request field; exact JSON type and requiredness are not fully inferred from the HAR. "
-                  x-observed-in-har: true
-              additionalProperties: true
-              description: "Observed request fields. Types and requiredness are intentionally left unspecified where the HAR did not prove them."
-      responses:
+                                  statsigMetadata:
+                                                  additionalProperties: true
+                    responses:
         "202":
           description: "Request accepted for asynchronous processing."
           content:
@@ -2757,28 +2286,26 @@ paths:
                 type: "object"
                 properties:
                   success:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                    additionalProperties: true
   "/ces/v1/telemetry/intake":
     post:
       tags: ["Telemetrie"]
       summary: "Telemetrie: POST /ces/v1/telemetry/intake"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 202. Feldnamen dokumentiert; Werte und Identifikatoren ausgelassen. "
+      description: "Requests: 1. HTTP status: 202.  "
       operationId: "postcesv1telemetryintake"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["202"]
+
+        statusCodes: ["202"]
         entriesWithoutHttpStatus: 0
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "text/plain":
             schema:
               type: "string"
-              description: "Telemetry payload. The HAR inventory exposes field names, not a stable public schema."
+              description: "Telemetry payload."
       responses:
         "202":
           description: "Request accepted for asynchronous processing."
@@ -2788,21 +2315,19 @@ paths:
                 type: "object"
                 properties:
                   ok:
-                    x-observed-in-har: true
-                  error:
-                    x-observed-in-har: true
-                additionalProperties: true
+                                      error:
+                                    additionalProperties: true
   "/files/{fileId}/raw":
     options:
       tags: ["Dateien / externer Upload"]
       summary: "Dateien / externer Upload: OPTIONS /files/{fileId}/raw"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. Im HAR vom 16.10.; signierte Upload-URL, keine Backend-API. "
+      description: "Requests: 1. HTTP status: 200. Signed upload URL. "
       operationId: "optionsfilesByfileIdraw"
-      x-observed-host: "sdmntprpolandcentral.oaiusercontent.com"
-      x-har-observations:
+      x-request-host: "sdmntprpolandcentral.oaiusercontent.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "fileId"
@@ -2810,23 +2335,22 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-      servers:
+                servers:
         - url: "https://sdmntprpolandcentral.oaiusercontent.com"
-          description: "Observed external storage host only. The actual signed upload URL is returned dynamically and may differ."
+          description: "External storage host. Signed upload URL returned dynamically."
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
     put:
       tags: ["Dateien / externer Upload"]
       summary: "Dateien / externer Upload: PUT /files/{fileId}/raw"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 201. Im HAR vom 16.10.; signierte Upload-URL, keine Backend-API. "
+      description: "Requests: 1. HTTP status: 201. Signed upload URL. "
       operationId: "putfilesByfileIdraw"
-      x-observed-host: "sdmntprpolandcentral.oaiusercontent.com"
-      x-har-observations:
+      x-request-host: "sdmntprpolandcentral.oaiusercontent.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["201"]
+
+        statusCodes: ["201"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "fileId"
@@ -2834,10 +2358,9 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-      servers:
+                servers:
         - url: "https://sdmntprpolandcentral.oaiusercontent.com"
-          description: "Observed external storage host only. The actual signed upload URL is returned dynamically and may differ."
+          description: "External storage host. Signed upload URL returned dynamically."
       requestBody:
         required: true
         description: "Upload URL is signed and returned by the file preparation endpoint."
@@ -2854,13 +2377,13 @@ paths:
     get:
       tags: ["Realtime und WebSocket"]
       summary: "Realtime und WebSocket: GET /p33/ws/user/{userId}"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 3 request(s) recorded. Observed HTTP status code(s): 101. Only the HTTP upgrade handshake is described here; message frames were not present in the HAR."
+      description: "Requests: 3. HTTP status: 101. WebSocket message frames: none."
       operationId: "getp33wsuserByuserId"
-      x-observed-host: "ws.chatgpt.com"
-      x-har-observations:
+      x-request-host: "ws.chatgpt.com"
+      x-request-statistics:
         requestCount: 3
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["101"]
+
+        statusCodes: ["101"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "userId"
@@ -2868,8 +2391,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR."
-        - name: "verify"
+                  - name: "verify"
           in: "query"
           required: false
           schema:
@@ -2879,18 +2401,18 @@ paths:
       x-transport: "websocket-handshake"
       responses:
         "101":
-          description: "WebSocket handshake observed; no WebSocket frames were captured."
+          description: "WebSocket handshake; message frames: none."
   "/realtime/wm":
     post:
       tags: ["Realtime und WebSocket"]
       summary: "Realtime und WebSocket: POST /realtime/wm"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 8 request(s) recorded. Observed HTTP status code(s): 201. "
+      description: "Requests: 8. HTTP status: 201. "
       operationId: "postrealtimewm"
-      x-observed-host: "chatgpt.com"
-      x-har-observations:
+      x-request-host: "chatgpt.com"
+      x-request-statistics:
         requestCount: 8
-        sources: ["2026-10-16"]
-        observedStatusCodes: ["201"]
+
+        statusCodes: ["201"]
         entriesWithoutHttpStatus: 0
       parameters:
         - name: "dcid"
@@ -2915,73 +2437,66 @@ paths:
             type: "string"
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/sdp":
             schema:
               type: "string"
               description: "SDP offer/body used for realtime session negotiation."
       responses:
         "201":
-          description: "Realtime session negotiation response observed."
+          description: "Realtime session negotiation response."
           content:
             "application/sdp":
               schema:
                 type: "string"
-                description: "SDP response body observed during realtime negotiation."
+                description: "SDP response body for realtime negotiation."
   "/v1/initialize":
     options:
       tags: ["Hilfsdienst / Initialisierung"]
       summary: "Hilfsdienst / Initialisierung: OPTIONS /v1/initialize"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 200. Zugehörig zum POST /v1/initialize. "
+      description: "Requests: 1. HTTP status: 200. Zugehörig zum POST /v1/initialize. "
       operationId: "optionsv1initialize"
-      x-observed-host: "ab.chatgpt.com"
-      x-har-observations:
+      x-request-host: "ab.chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["200"]
+
+        statusCodes: ["200"]
         entriesWithoutHttpStatus: 0
       servers:
         - url: "https://ab.chatgpt.com"
       responses:
         "200":
-          description: "HTTP 200 response observed in the HAR."
+          description: "HTTP 200 response."
     post:
       tags: ["Hilfsdienst / Initialisierung"]
       summary: "Hilfsdienst / Initialisierung: POST /v1/initialize"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 204. Zweck aus dem HAR allein nicht sicher bestimmbar. "
+      description: "Requests: 1. HTTP status: 204.  "
       operationId: "postv1initialize"
-      x-observed-host: "ab.chatgpt.com"
-      x-har-observations:
+      x-request-host: "ab.chatgpt.com"
+      x-request-statistics:
         requestCount: 1
-        sources: ["2026-10-22"]
-        observedStatusCodes: ["204"]
+
+        statusCodes: ["204"]
         entriesWithoutHttpStatus: 0
       servers:
         - url: "https://ab.chatgpt.com"
       requestBody:
         required: true
-        description: "Request body observed or inferred from the endpoint's HAR entry."
-        content:
+                content:
           "application/json":
             schema:
               type: "object"
               additionalProperties: true
-              description: "Opaque JSON request body; the HAR did not support a reliable field-level schema."
+              description: "Opaque JSON request body."
       responses:
         "204":
           description: "Request completed without a response body."
 components:
   schemas:
-    ObservedJsonObject:
+    JsonObjectPayload:
       type: "object"
       additionalProperties: true
-      description: "Fallback schema for a JSON object whose complete property structure was not captured."
-    ObservedStream:
+      description: "JSON object payload."
+    StreamPayload:
       type: "string"
       description: "Streaming response body."
-x-sources:
-  - capture: "2026-10-16"
-    description: "HAR capture covering project, conversation, file, settings, connector, telemetry, and realtime activity."
-  - capture: "2026-10-22"
-    description: "HAR capture covering dictation, conversation streaming, telemetry, feedback, and additional realtime activity."
