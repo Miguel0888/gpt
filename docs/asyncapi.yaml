@@ -38,7 +38,7 @@ channels:
         $ref: "#/components/messages/ConversationDoneMarker"
   fileProcessingStream:
     address: /backend-api/files/process_upload_stream
-    description: Body framing: newline-delimited JSON. Content-Type: text/event-stream.
+    description: "Body framing: newline-delimited JSON. Content-Type: text/event-stream."
     messages:
       fileProcessing:
         $ref: "#/components/messages/FileProcessingEvent"
