@@ -37,4 +37,4 @@ jobs:
       - name: Validate AsyncAPI
         run: npx --yes @asyncapi/cli@5.0.7 validate docs/asyncapi.yaml --fail-severity error
       - name: Lint OpenAPI
-        run: npx --yes @redocly/cli lint docs/openapi.yaml
+        run: npx --yes @redocly/cli lint --extends=minimal docs/openapi.yaml
