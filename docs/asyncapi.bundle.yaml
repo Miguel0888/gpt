@@ -319,7 +319,6 @@ components:
             "properties": {
               "file_id": {
                 "type": "string",
-                "description": "File identifier; treat as sensitive metadata."
               },
               "event": {
                 "type": "string",
