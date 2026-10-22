@@ -69,9 +69,46 @@ def write_bundle(bundle):
         )
 
 
+def collect_differences(expected, actual, path="$"):
+    if type(expected) is not type(actual):
+        return [(path, expected, actual)]
+
+    if isinstance(expected, dict):
+        differences = []
+        for key in sorted(set(expected) | set(actual)):
+            child_path = path + "." + str(key)
+            if key not in expected:
+                differences.append((child_path, "<missing>", actual[key]))
+            elif key not in actual:
+                differences.append((child_path, expected[key], "<missing>"))
+            else:
+                differences.extend(collect_differences(expected[key], actual[key], child_path))
+        return differences
+
+    if isinstance(expected, list):
+        differences = []
+        if len(expected) != len(actual):
+            differences.append((path + ".length", len(expected), len(actual)))
+        for index, (expected_item, actual_item) in enumerate(zip(expected, actual)):
+            differences.extend(collect_differences(expected_item, actual_item, path + "[" + str(index) + "]"))
+        return differences
+
+    if expected != actual:
+        return [(path, expected, actual)]
+
+    return []
+
+
 def verify_bundle(expected_bundle):
     actual_bundle = load_yaml(BUNDLE_PATH)
-    if actual_bundle != expected_bundle:
+    differences = collect_differences(expected_bundle, actual_bundle)
+    if differences:
+        for path, expected, actual in differences[:20]:
+            print(
+                path + ": expected " + json.dumps(expected, ensure_ascii=False)
+                + "; actual " + json.dumps(actual, ensure_ascii=False),
+                file=sys.stderr,
+            )
         raise SystemExit(
             "AsyncAPI viewer bundle is stale. Run: "
             "python scripts/build_asyncapi_bundle.py"
