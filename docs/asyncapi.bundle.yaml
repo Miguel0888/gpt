@@ -192,9 +192,9 @@ components:
       name: message_marker
       title: Message marker
       description: >
-        JSON data event identified by its type field. The capture summary reports
-        marker values cot_token, user_visible_token, final_channel_token and
-        last_token; the exact property name carrying those values is not asserted.
+        JSON data event identified by its type field. Observed marker values:
+        cot_token, user_visible_token, final_channel_token and last_token.
+        The marker field name is unknown.
       contentType: application/json
       x-payload-type-field: type
       payload:

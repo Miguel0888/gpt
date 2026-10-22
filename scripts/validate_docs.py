@@ -89,6 +89,11 @@ def main():
     require("not an official or stable openai api" not in openapi_text, "Remove editorial API disclaimers from OpenAPI.")
     require("not an official or stable openai api" not in asyncapi_text, "Remove editorial API disclaimers from AsyncAPI.")
     require("this is an internal, reverse-engineered web interface" not in openapi_text, "Remove repeated editorial text from OpenAPI.")
+    require("use the value returned by the application" not in openapi_text, "Remove instructional filler from OpenAPI descriptions.")
+    require("do not construct or persist signed query values" not in openapi_text, "Remove advisory text from OpenAPI descriptions.")
+    require("should be rechecked against future captures" not in openapi_text, "Keep OpenAPI descriptions focused on captured results.")
+    require("out of scope for openapi" not in openapi_text, "Describe observed WebSocket frames as findings, not scope commentary.")
+    require("not asserted to be exhaustive" not in openapi_text, "Remove editorial schema disclaimers from OpenAPI.")
 
     asyncapi_bundle = (DOCS / "asyncapi.bundle.yaml").read_text(encoding="utf-8")
     require("./schemas/chat-stream-events.schema.json#/" not in asyncapi_bundle, "AsyncAPI viewer bundle must not contain external JSON Schema references.")

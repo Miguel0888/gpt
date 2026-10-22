@@ -29,7 +29,7 @@ paths:
     get:
       tags: ["Codex Cloud / WebSocket"]
       summary: "Codex Cloud / WebSocket: GET /"
-      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 101. No WebSocket frames were captured. No WebSocket message frames were captured."
+      description: "Observed in the HAR captures dated 2026-10-16 and/or 2026-10-22. 1 request(s) recorded. Observed HTTP status code(s): 101. No WebSocket message frames were captured."
       operationId: "getRoot"
       x-observed-host: "codex-cloud-backend.chatgpt.com"
       x-har-observations:
@@ -542,7 +542,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
       requestBody:
         required: true
         description: "Request body observed or inferred from the endpoint's HAR entry."
@@ -584,7 +584,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
       responses:
         "200":
           description: "HTTP 200 response observed in the HAR."
@@ -796,7 +796,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
         - name: "include_has_versions"
           in: "query"
           required: false
@@ -907,7 +907,7 @@ paths:
       x-transport: "websocket-handshake"
       responses:
         "101":
-          description: "WebSocket handshake observed. HAR files contain no WebSocket frames; message payloads are out of scope for OpenAPI."
+          description: "WebSocket handshake observed; no WebSocket frames were captured."
   "/backend-api/dictation/upload-asset":
     post:
       tags: ["Spracheingabe / Diktat"]
@@ -1073,7 +1073,7 @@ paths:
             "text/event-stream":
               schema:
                 type: "string"
-                description: "Observed as a Server-Sent Events stream. Four complete response streams were captured. Explicit SSE event names: delta and delta_encoding. Additional JSON data objects use the type values resume_conversation_token, input_message, title_generation, message_marker, server_ste_metadata, message_stream_complete and conversation_detail_metadata. The [DONE] completion sentinel was also observed. Payload schemas are incomplete and are not asserted to be exhaustive."
+                description: "Observed as a Server-Sent Events stream. Four complete response streams were captured. Explicit SSE event names: delta and delta_encoding. Additional JSON data objects use the type values resume_conversation_token, input_message, title_generation, message_marker, server_ste_metadata, message_stream_complete and conversation_detail_metadata. The [DONE] completion sentinel was also observed. Payload schemas are incomplete."
                 x-stream-protocol: "Server-Sent Events (SSE)"
                 x-stream-observations:
                   completeStreams: 4
@@ -1236,7 +1236,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
         - name: "download_intent"
           in: "query"
           required: false
@@ -1317,7 +1317,7 @@ paths:
             "text/event-stream":
               schema:
                 type: "string"
-                description: "The response Content-Type is text/event-stream, but the captured body uses newline-delimited JSON objects rather than conventional SSE event/data framing. Observed event values include file.processing.started, file.processing.file_ready, file.indexing.completed and file.processing.completed. The payload shape is based on the supplied capture and should be rechecked against future captures."
+                description: "The response Content-Type is text/event-stream, but the captured body uses newline-delimited JSON objects rather than conventional SSE event/data framing. Observed event values include file.processing.started, file.processing.file_ready, file.indexing.completed and file.processing.completed. The payload shape is based on the supplied capture."
                 x-stream-protocol: "newline-delimited JSON (observed body)"
                 x-stream-observations:
                   contentType: "text/event-stream"
@@ -1340,7 +1340,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
         - name: "include_file_limits"
           in: "query"
           required: false
@@ -1387,7 +1387,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
         - name: "limit"
           in: "query"
           required: false
@@ -1509,7 +1509,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
       responses:
         "200":
           description: "HTTP 200 response observed in the HAR."
@@ -1808,7 +1808,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
         - name: "limit"
           in: "query"
           required: false
@@ -1847,7 +1847,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
       requestBody:
         required: true
         description: "Request body observed or inferred from the endpoint's HAR entry."
@@ -1889,13 +1889,13 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
         - name: "fileId"
           in: "path"
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
       responses:
         "200":
           description: "HTTP 200 response observed in the HAR."
@@ -1925,7 +1925,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
         - name: "limit"
           in: "query"
           required: false
@@ -2810,7 +2810,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
       servers:
         - url: "https://sdmntprpolandcentral.oaiusercontent.com"
           description: "Observed external storage host only. The actual signed upload URL is returned dynamically and may differ."
@@ -2834,13 +2834,13 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
       servers:
         - url: "https://sdmntprpolandcentral.oaiusercontent.com"
           description: "Observed external storage host only. The actual signed upload URL is returned dynamically and may differ."
       requestBody:
         required: true
-        description: "Upload URL is signed and returned by the file preparation endpoint; do not construct or persist signed query values."
+        description: "Upload URL is signed and returned by the file preparation endpoint."
         content:
           "application/octet-stream":
             schema:
@@ -2868,7 +2868,7 @@ paths:
           required: true
           schema:
             type: "string"
-          description: "Path identifier placeholder normalized from the HAR; use the value returned by the application."
+          description: "Path identifier placeholder normalized from the HAR."
         - name: "verify"
           in: "query"
           required: false
@@ -2879,7 +2879,7 @@ paths:
       x-transport: "websocket-handshake"
       responses:
         "101":
-          description: "WebSocket handshake observed. HAR files contain no WebSocket frames; message payloads are out of scope for OpenAPI."
+          description: "WebSocket handshake observed; no WebSocket frames were captured."
   "/realtime/wm":
     post:
       tags: ["Realtime und WebSocket"]
