@@ -124,7 +124,9 @@ components:
       contentType: application/json
       x-sse-event-name: delta
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDeltaPayload"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDeltaPayload"
     ConversationDeltaEncoding:
       name: delta_encoding
       title: Delta encoding
@@ -132,7 +134,9 @@ components:
       contentType: application/json
       x-sse-event-name: delta_encoding
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDeltaEncodingPayload"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDeltaEncodingPayload"
     ResumeConversationToken:
       name: resume_conversation_token
       title: Conversation resume token
@@ -140,7 +144,9 @@ components:
       contentType: application/json
       x-payload-type-field: type
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationResumeToken"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationResumeToken"
     InputMessage:
       name: input_message
       title: Input message
@@ -148,7 +154,9 @@ components:
       contentType: application/json
       x-payload-type-field: type
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationInputMessage"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationInputMessage"
     TitleGeneration:
       name: title_generation
       title: Title generation
@@ -156,7 +164,9 @@ components:
       contentType: application/json
       x-payload-type-field: type
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationTitleGeneration"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationTitleGeneration"
     MessageMarker:
       name: message_marker
       title: Message marker
@@ -167,7 +177,9 @@ components:
       contentType: application/json
       x-payload-type-field: type
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationMessageMarker"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationMessageMarker"
     ServerSteMetadata:
       name: server_ste_metadata
       title: Server STE metadata
@@ -175,7 +187,9 @@ components:
       contentType: application/json
       x-payload-type-field: type
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationServerSteMetadata"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationServerSteMetadata"
     MessageStreamComplete:
       name: message_stream_complete
       title: Message stream complete
@@ -183,7 +197,9 @@ components:
       contentType: application/json
       x-payload-type-field: type
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationMessageStreamComplete"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationMessageStreamComplete"
     ConversationDetailMetadata:
       name: conversation_detail_metadata
       title: Conversation detail metadata
@@ -191,7 +207,9 @@ components:
       contentType: application/json
       x-payload-type-field: type
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDetailMetadata"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDetailMetadata"
     ConversationDoneMarker:
       name: "[DONE]"
       title: Stream completion sentinel
@@ -199,7 +217,9 @@ components:
       contentType: text/plain
       x-stream-terminator: true
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDoneMarker"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/ConversationDoneMarker"
     FileProcessingEvent:
       name: file-processing-event
       title: File processing event
@@ -208,4 +228,6 @@ components:
         Progress is absent from the observed file.indexing.completed event.
       contentType: application/json
       payload:
-        $ref: "./schemas/chat-stream-events.schema.json#/definitions/FileProcessingEvent"
+        schemaFormat: "application/schema+json;version=draft-07"
+        schema:
+          $ref: "./schemas/chat-stream-events.schema.json#/definitions/FileProcessingEvent"
