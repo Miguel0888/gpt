@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://miguel0888.github.io/gpt/schemas/chat-stream-events.schema.json",
+  "title": "ChatGPT web stream event payloads",
+  "description": "Reusable JSON Schema definitions for observed wire payloads. Unknown fields and unknown payload shapes remain permissive by design.",
+  "definitions": {
+    "ConversationDeltaPayload": {
+      "description": "Payload of the explicitly named SSE delta event. The available HAR summary does not establish a stable field-level shape."
+    },
+    "ConversationDeltaEncodingPayload": {
+      "description": "Payload of the explicitly named SSE delta_encoding event. The capture summary reports the value v1 but does not establish the complete wire shape."
+    },
+    "ConversationResumeToken": {
+      "type": "object",
+      "description": "Observed JSON data event. Do not persist or log token values.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "resume_conversation_token"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "ConversationInputMessage": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "input_message"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "ConversationTitleGeneration": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "title_generation"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "ConversationMessageMarker": {
+      "type": "object",
+      "description": "Observed marker values include cot_token, user_visible_token, final_channel_token and last_token. The field carrying the marker value is not inferred here.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "message_marker"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "ConversationServerSteMetadata": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "server_ste_metadata"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "ConversationMessageStreamComplete": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "message_stream_complete"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "ConversationDetailMetadata": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "conversation_detail_metadata"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "additionalProperties": true
+    },
+    "ConversationDoneMarker": {
+      "type": "string",
+      "enum": [
+        "[DONE]"
+      ]
+    },
+    "FileProcessingEvent": {
+      "type": "object",
+      "description": "Observed line-delimited JSON event from POST /backend-api/files/process_upload_stream.",
+      "properties": {
+        "file_id": {
+          "type": "string",
+          "description": "File identifier; treat as sensitive metadata."
+        },
+        "event": {
+          "type": "string",
+          "enum": [
+            "file.processing.started",
+            "file.processing.file_ready",
+            "file.indexing.completed",
+            "file.processing.completed"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "progress": {
+          "type": "number",
+          "description": "Observed as 0, 20 and 100 for some events; absent from the observed file.indexing.completed event."
+        },
+        "extra": {
+          "description": "Observed as null in the supplied example; the actual type is not established."
+        }
+      },
+      "required": [
+        "file_id",
+        "event"
+      ],
+      "additionalProperties": true
+    }
+  }
+}

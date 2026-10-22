@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://miguel0888.github.io/gpt/schemas/normalized-event.schema.json",
+  "title": "Browser Event Hub normalized event",
+  "description": "Proposed stable event envelope emitted by the browser hook layer. This is an application contract, not a payload copied from ChatGPT's wire protocol.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "eventId",
+    "eventType",
+    "occurredAt",
+    "sequence",
+    "source",
+    "payload"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "enum": [
+        "1.0"
+      ]
+    },
+    "eventId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier assigned by the event hub."
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "network.request.started",
+        "network.response.headers",
+        "network.response.completed",
+        "network.request.failed",
+        "conversation.stream.event",
+        "conversation.stream.completed",
+        "file.processing.progress",
+        "websocket.opened",
+        "websocket.message",
+        "websocket.closed",
+        "navigation.changed",
+        "dom.action",
+        "hook.error"
+      ]
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonic sequence assigned within one event hub instance."
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "fetch",
+        "xhr",
+        "websocket",
+        "navigation",
+        "dom"
+      ]
+    },
+    "requestId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional identifier used to correlate events from one HTTP request or stream."
+    },
+    "correlationId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional identifier linking related requests when evidence supports the relationship."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Normalized, allowlisted payload. Keep raw credentials and sensitive values out of this envelope.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}
