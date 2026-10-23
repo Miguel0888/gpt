@@ -6,13 +6,17 @@ on:
       - main
       - docs/chatgpt-openapi-har-20261022
     paths:
+      - "README.md"
       - "docs/**"
       - "scripts/validate_docs.py"
+      - "scripts/smoke_test_docs.py"
       - ".github/workflows/validate-api-docs.yml"
   pull_request:
     paths:
+      - "README.md"
       - "docs/**"
       - "scripts/validate_docs.py"
+      - "scripts/smoke_test_docs.py"
       - ".github/workflows/validate-api-docs.yml"
 
 permissions:
@@ -36,7 +40,7 @@ jobs:
         run: python -m pip install PyYAML==6.0.3
       - name: Verify the AsyncAPI viewer bundle
         run: python scripts/build_asyncapi_bundle.py --check
-      - name: Check documentation paths and JSON Schemas
+      - name: Check documentation paths, Markdown links, and JSON Schemas
         run: python scripts/validate_docs.py
       - name: Validate AsyncAPI source
         run: npx --yes @asyncapi/cli@5.0.7 validate docs/asyncapi.yaml --fail-severity error
@@ -44,3 +48,27 @@ jobs:
         run: npx --yes @asyncapi/cli@5.0.7 validate docs/asyncapi.bundle.yaml --fail-severity error
       - name: Lint OpenAPI
         run: npx --yes @redocly/cli lint --extends=minimal docs/openapi.yaml
+
+  browser-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - name: Install Jekyll
+        run: gem install jekyll --no-document
+      - name: Build the GitHub Pages site
+        run: jekyll build --source docs --destination "$GITHUB_WORKSPACE/_site"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Playwright
+        run: python -m pip install playwright==1.55.0
+      - name: Install Chromium and system dependencies
+        run: python -m playwright install --with-deps chromium
+      - name: Test rendered documentation and navigation in Chromium
+        run: python scripts/smoke_test_docs.py --site-dir "$GITHUB_WORKSPACE/_site"
