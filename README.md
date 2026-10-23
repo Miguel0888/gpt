@@ -33,4 +33,4 @@ Mit `python scripts/build_asyncapi_bundle.py --check` lässt sich das vorhandene
 
 ## Validierung
 
-GitHub Actions validiert OpenAPI, AsyncAPI, JSON-Schemas, Dokumentationspfade und das generierte AsyncAPI-Bundle.
+GitHub Actions validiert OpenAPI, AsyncAPI, JSON-Schemas, HTML- und Markdown-Links, lokale Anker, Jekyll-Seitenpfade und das generierte AsyncAPI-Bundle. Ein Chromium-Smoke-Test prüft zusätzlich die gerenderte AsyncAPI-Komponente, Swagger UI und die Dokumentationsnavigation.
